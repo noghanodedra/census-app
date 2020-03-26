@@ -44,7 +44,6 @@ const Login = ({ navigation }) => {
 
   const _onLoginPressed = (e: any) => {
     e.preventDefault();
-    setLoading(true);
     const emailError = emailValidator(email.value);
     const passwordError = passwordValidator(password.value);
 
@@ -53,6 +52,7 @@ const Login = ({ navigation }) => {
       setPassword({ ...password, error: passwordError });
       return;
     }
+    setLoading(true);
     login({ variables: { email: email.value, password: password.value } })
       .then(({ data }) => {
         console.log(data);

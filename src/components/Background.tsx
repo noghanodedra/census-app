@@ -7,11 +7,7 @@ import {
 import { theme } from "helpers";
 
 const Background = ({ children }) => (
-  <ImageBackground
-    source={require("../assets/background_dot.png")}
-    resizeMode="repeat"
-    style={styles.background}
-  >
+  <ImageBackground source={null} resizeMode="repeat" style={styles.background}>
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       {children}
     </KeyboardAvoidingView>

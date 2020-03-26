@@ -1,7 +1,9 @@
+export { default as Address } from "./address/Address";
 export { default as BackButton } from "./BackButton";
 export { default as Background } from "./Background";
 export { default as Button } from "./Button";
 export { default as CenterSpinner } from "./CenterSpinner";
+export { default as Dropdown } from "./Dropdown";
 export { default as FAB } from "./FAB";
 export { default as Header } from "./Header";
 export { default as Logo } from "./Logo";
@@ -9,3 +11,4 @@ export { default as LogoutDrawerItem } from "./LogoutDrawerItem";
 export { default as Paragraph } from "./Paragraph";
 export { default as TextInput } from "./TextInput";
 export { default as UserInfo } from "./UserInfo";
+export { default as ViewWithTitle } from "./ViewWithTitle";

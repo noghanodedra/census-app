@@ -1,9 +1,10 @@
 import React, { memo } from "react";
-
-import { Background, FAB, Paragraph, CenterSpinner } from "components";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
+import { Background, FAB, Paragraph, CenterSpinner } from "components";
 import styles from "./styles";
+import { View } from "react-native";
+import { SafeAreaView } from "react-navigation";
 
 const GET_DATA = gql`
   {
@@ -55,30 +56,44 @@ const GET_DATA = gql`
       name
       description
     }
+
+    stateList {
+      id
+      name
+      code
+      districts {
+        id
+        name
+      }
+    }
   }
 `;
 
 const LandingPage = ({ ...props }) => {
   const { loading, error, data } = useQuery(GET_DATA);
-  console.log(data);
 
   if (loading) {
     return <CenterSpinner />;
   }
   console.log(error);
+  console.log(data);
+
   return (
-    <Background>
+    <SafeAreaView>
       <Paragraph>
         Your amazing app starts here. Open you favourite code editor and start
         editing this project.
       </Paragraph>
-      <FAB
-        small
-        label="Register"
-        icon="plus"
-        onPress={() => console.log("Pressed")}
-      />
-    </Background>
+      <View style={styles.fixedView}>
+        <FAB
+          style={styles.fab}
+          small
+          label="Register"
+          icon="plus"
+          onPress={() => props.navigationCallBack(data)}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 

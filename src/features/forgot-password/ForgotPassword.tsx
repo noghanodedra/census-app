@@ -1,6 +1,5 @@
 import React, { memo, useState } from "react";
 import { Text, TouchableOpacity } from "react-native";
-
 import { emailValidator } from "helpers/utils";
 import {
   Button,

@@ -4,7 +4,7 @@ import { Avatar, Title, Caption } from "react-native-paper";
 import Moment from "moment";
 
 import { theme } from "helpers";
-import { CenterSpinner } from "components";
+import CenterSpinner from "components/CenterSpinner";
 import { getUser } from "helpers/utils";
 
 const UserInfo = ({ ...props }) => {

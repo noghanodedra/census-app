@@ -1,6 +1,5 @@
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
-
 import { Home, Login, SignUp, ForgotPassword, DashBoard } from "features";
 
 const Router = createStackNavigator(

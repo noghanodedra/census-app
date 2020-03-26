@@ -1,5 +1,4 @@
 import React, { memo } from "react";
-
 import { Button, Background, Header, Logo, Paragraph } from "components";
 import styles from "./styles";
 import ScreenNames from "constants/screen-names";

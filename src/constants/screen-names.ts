@@ -6,6 +6,7 @@ const ScreenNames = {
   DASHBOARD: "DashBoard",
   LOGIN: "Login",
   FORGOT_PASSWORD: "ForgotPassword",
-  SIGN_UP: "SignUp"
+  SIGN_UP: "SignUp",
+  REGISTRATION: "Registration"
 };
 export default ScreenNames;
