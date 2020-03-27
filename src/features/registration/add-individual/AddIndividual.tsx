@@ -20,7 +20,7 @@ const ADD_INDIVIDUAL = gql`
   }
 `;
 
-const AddIndividual = ({ navigation, dropDownData }, ref) => {
+const AddIndividual = ({ navigation, dropDownData, family }, ref) => {
   const [createIndividual] = useMutation(ADD_INDIVIDUAL);
 
   const [name, setName] = useState({
@@ -40,50 +40,62 @@ const AddIndividual = ({ navigation, dropDownData }, ref) => {
     error: ""
   });
   const [education, setEducation] = useState({
-    value: {},
+    value: { id: "" },
     error: ""
   });
 
   const [workClass, setWorkClass] = useState({
-    value: {},
+    value: { id: "" },
     error: ""
   });
 
   const [occupation, setOccupation] = useState({
-    value: {},
+    value: { id: "" },
     error: ""
   });
 
   const [relationship, setRelationship] = useState({
-    value: {},
+    value: { id: "" },
     error: ""
   });
 
   const [caste, setCaste] = useState({
-    value: {},
+    value: { id: "" },
     error: ""
   });
 
   const [gender, setGender] = useState({
-    value: {},
+    value: { id: "" },
     error: ""
   });
 
   const [incomeClass, setIncomeClass] = useState({
-    value: {},
+    value: { id: "" },
     error: ""
   });
 
   const [maritalStatus, setMaritalStatus] = useState({
-    value: {},
+    value: { id: "" },
     error: ""
   });
 
   const _onAddIndividual = () => {
-    const family = {
-      censusId: Number.parseInt("0", 10)
+    const individual = {
+      name: name.value,
+      age: Number.parseInt(age.value, 10),
+      educationYears: Number.parseInt(educationYears.value, 10),
+      hoursPerWeek: Number.parseInt(hoursPerWeek.value, 10),
+      educationId: Number.parseInt(education.value.id, 10),
+      workClassId: Number.parseInt(workClass.value.id, 10),
+      occupationId: Number.parseInt(occupation.value.id, 10),
+      relationshipId: Number.parseInt(relationship.value.id, 10),
+      casteId: Number.parseInt(caste.value.id, 10),
+      genderId: Number.parseInt(gender.value.id, 10),
+      familyId: Number.parseInt(family.id, 10),
+      incomeClassId: Number.parseInt(incomeClass.value.id, 10),
+      maritalStatusId: Number.parseInt(maritalStatus.value.id, 10)
     };
-    return createIndividual({ variables: { family } });
+    return createIndividual({ variables: { individual } });
   };
 
   useImperativeHandle(ref, () => ({

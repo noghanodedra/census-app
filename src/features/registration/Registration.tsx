@@ -21,7 +21,7 @@ const Registration = ({ ...props }) => {
   let addFamilyCompRef = useRef(null);
   let addIndividualCompRef = useRef(null);
   const onAddFamily = () => {
-    /* addFamilyCompRef.current
+    addFamilyCompRef.current
       ._onAddFamily()
       .then(({ data }) => {
         setFamily(data.createFamily);
@@ -29,7 +29,20 @@ const Registration = ({ ...props }) => {
       .catch(e => {
         console.error(e);
         setState({ errors: true, isValid: true });
-      });*/
+      });
+  };
+
+  const onAddIndividual = () => {
+    addIndividualCompRef.current
+      ._onAddIndividual()
+      .then(({ data }) => {
+        console.log(data);
+        //setFamily(data.createFamily);
+      })
+      .catch(e => {
+        console.error(e);
+        setState({ errors: true, isValid: true });
+      });
   };
 
   const progressStepsStyle = {
@@ -78,10 +91,13 @@ const Registration = ({ ...props }) => {
             nextBtnStyle={buttonStyle}
             nextBtnTextStyle={buttonTextStyle}
             previousBtnStyle={{ display: "none" }}
+            onNext={onAddIndividual}
+            errors={state.errors}
           >
             <View style={{ alignItems: "center" }}>
               <AddIndividual
                 dropDownData={data}
+                family={family}
                 navigation={props.navigation}
                 ref={addIndividualCompRef}
               ></AddIndividual>
@@ -92,7 +108,7 @@ const Registration = ({ ...props }) => {
             nextBtnText="Done!"
             nextBtnStyle={buttonStyle}
             nextBtnTextStyle={buttonTextStyle}
-            previousBtnStyle={{ display: "none" }}
+            //previousBtnStyle={{ display: "none" }}
           >
             <View style={{ alignItems: "center" }}>
               <Text>This is the content within step 3!</Text>
