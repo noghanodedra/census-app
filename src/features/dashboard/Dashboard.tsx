@@ -13,7 +13,6 @@ const Drawer = createDrawerNavigator();
 
 const MainScreen = ({ ...props }) => {
   const navigateToReg = data => {
-    console.log("data", data);
     props.navigation.navigate(ScreenNames.REGISTRATION, { data });
   };
 

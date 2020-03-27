@@ -18,7 +18,7 @@ const LogoutDrawerItem = ({ ...props }) => {
         props.navigation.navigate(ScreenNames.HOME);
       })
       .catch(e => {
-        console.log(e);
+        console.error(e);
       });
   };
 

@@ -6,25 +6,23 @@ import { View } from "react-native";
 
 const Address = ({ ...props }) => {
   const [districts, setDistricts] = useState([]);
+  const [line1, setLine1] = useState({ value: "sf", error: "" });
+  const [line2, setLine2] = useState({ value: "cv", error: "" });
+  const [line3, setLine3] = useState({ value: "ff", error: "" });
+  const [state, setState] = useState({ value: { name: "" }, error: "" });
+  const [district, setDistrict] = useState({ value: { name: "" }, error: "" });
+  const [townCity, setTownCity] = useState({ value: "tryty", error: "" });
+  const [postcode, setPostcode] = useState({ value: "5656", error: "" });
 
-  const [line1, setLine1] = useState({ value: "", error: "" });
-  const [line2, setLine2] = useState({ value: "", error: "" });
-  const [line3, setLine3] = useState({ value: "", error: "" });
-  const [state, setState] = useState({ value: "", error: "" });
-  const [district, setDistrict] = useState({ value: "", error: "" });
-  const [townCity, setTownCity] = useState({ value: "", error: "" });
-  const [postcode, setPostcode] = useState({ value: "", error: "" });
-  let data = [
-    {
-      value: "Banana"
-    },
-    {
-      value: "Mango"
-    },
-    {
-      value: "Pear"
-    }
-  ];
+  const { addressData } = props;
+
+  addressData.line1 = line1.value;
+  addressData.line2 = line2.value;
+  addressData.line3 = line3.value;
+  addressData.state = state.value.name;
+  addressData.district = district.value.name;
+  addressData.postcode = postcode.value;
+  addressData.townCity = townCity.value;
 
   return (
     <View style={styles.container}>
@@ -68,9 +66,8 @@ const Address = ({ ...props }) => {
         label="Select state"
         data={props.states}
         onChangeText={value => {
-          console.log("change", value);
           setDistricts(value.districts);
-          setDistrict({ value: value, error: "" });
+          setState({ value: value, error: "" });
         }}
       ></Dropdown>
       <Dropdown
@@ -78,8 +75,7 @@ const Address = ({ ...props }) => {
         data={districts}
         dropdownPosition={2}
         onChangeText={value => {
-          console.log("change", value);
-          setState({ value: value, error: "" });
+          setDistrict({ value: value, error: "" });
         }}
       ></Dropdown>
       <TextInput

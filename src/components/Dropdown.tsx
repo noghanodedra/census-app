@@ -19,7 +19,7 @@ const Dropdown = ({ ...props }) => {
         containerStyle={[props.containerStyle, styles.containerStyle]}
         dropdownOffset={{ top: 16, left: 5 }}
         dropdownPosition={0}
-        itemCount={5}
+        itemCount={3}
         pickerStyle={styles.pickerStyle}
         underlineColor="transparent"
         mode="outlined"

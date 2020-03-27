@@ -66,6 +66,11 @@ const GET_DATA = gql`
         name
       }
     }
+
+    censusList {
+      id
+      name
+    }
   }
 `;
 
@@ -76,7 +81,6 @@ const LandingPage = ({ ...props }) => {
     return <CenterSpinner />;
   }
   console.log(error);
-  console.log(data);
 
   return (
     <SafeAreaView>
