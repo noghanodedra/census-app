@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { Dropdown as MaterialDropdown } from "react-native-material-dropdown";
 import { theme } from "helpers";
 
@@ -16,7 +16,11 @@ const Dropdown = ({ ...props }) => {
           styles.inputContainerStyle
         ]}
         itemTextStyle={[props.itemTextStyle, styles.itemTextStyle]}
-        containerStyle={[props.containerStyle, styles.containerStyle]}
+        containerStyle={[
+          props.containerStyle,
+          styles.containerStyle,
+          !!props.errorText && { borderColor: "rgb(241, 58, 89)" }
+        ]}
         dropdownOffset={{ top: 16, left: 5 }}
         dropdownPosition={0}
         itemCount={3}
@@ -24,6 +28,9 @@ const Dropdown = ({ ...props }) => {
         underlineColor="transparent"
         mode="outlined"
       />
+      {props.errorText ? (
+        <Text style={styles.error}>{props.errorText}</Text>
+      ) : null}
     </View>
   );
 };
@@ -45,6 +52,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     borderWidth: 1,
     borderColor: "rgba(0, 0, 0, 0.54)",
+    //borderColor: "rgb(241, 58, 89)", //red
     padding: 5
   },
   itemTextStyle: {
@@ -55,6 +63,12 @@ const styles = StyleSheet.create({
     borderBottomColor: "transparent",
     borderWidth: 0,
     backgroundColor: theme.colors.surface
+  },
+  error: {
+    fontSize: 14,
+    color: theme.colors.error,
+    paddingHorizontal: 4,
+    paddingTop: 4
   }
 });
 

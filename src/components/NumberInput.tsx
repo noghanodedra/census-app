@@ -9,14 +9,23 @@ const NumberInput = ({ ...props }) => {
     <View style={styles.container}>
       <Text style={styles.label}>{props.label}</Text>
       <NumericInput
-        upDownButtonsBackgroundColor={theme.colors.primary}
-        rightButtonBackgroundColor={theme.colors.primary}
-        leftButtonBackgroundColor={theme.colors.primary}
+        upDownButtonsBackgroundColor={
+          props.errorText ? theme.colors.error : theme.colors.primary
+        }
+        rightButtonBackgroundColor={
+          props.errorText ? theme.colors.error : theme.colors.primary
+        }
+        leftButtonBackgroundColor={
+          props.errorText ? theme.colors.error : theme.colors.primary
+        }
         rounded
         iconStyle={{ color: "white" }}
         onChange={props.onChange}
         {...props}
       ></NumericInput>
+      {props.errorText ? (
+        <Text style={[styles.error, styles.break]}>{props.errorText}</Text>
+      ) : null}
     </View>
   );
 };
@@ -25,6 +34,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "row",
+    flexWrap: "wrap",
     marginBottom: 10,
     marginTop: 12
   },
@@ -35,7 +45,17 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     color: theme.colors.placeholder
   },
-  iconStyle: { color: "white" }
+  iconStyle: { color: "white" },
+  error: {
+    fontSize: 14,
+    color: theme.colors.error,
+    paddingHorizontal: 4,
+    paddingTop: 4
+  },
+  break: {
+    flexBasis: "100%",
+    flexGrow: 0
+  }
 });
 
 export default NumberInput;

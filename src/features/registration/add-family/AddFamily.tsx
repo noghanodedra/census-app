@@ -2,8 +2,6 @@ import React, { useState, forwardRef, useImperativeHandle } from "react";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import {
-  Button,
-  BackButton,
   Background,
   CenterSpinner,
   ViewWithTitle,
@@ -13,7 +11,6 @@ import {
 } from "components";
 
 import styles from "./styles";
-import ScreenNames from "constants/screen-names";
 import { View } from "react-native";
 
 const ADD_FAMILY = gql`
@@ -27,7 +24,7 @@ const ADD_FAMILY = gql`
 
 const AddFamily = ({ navigation, dropDownData }, ref) => {
   const [headName, setHeadName] = useState({
-    value: "sdd",
+    value: "test",
     error: ""
   });
   const [census, setCensus] = useState({
@@ -35,7 +32,6 @@ const AddFamily = ({ navigation, dropDownData }, ref) => {
     error: ""
   });
   const [isLoading, setLoading] = useState(false);
-
   const [createFamily] = useMutation(ADD_FAMILY);
   const address = {
     line1: "",
@@ -46,11 +42,20 @@ const AddFamily = ({ navigation, dropDownData }, ref) => {
     townCity: "",
     postcode: ""
   };
-  const _onAddFamily = () => {
-    if (!headName) {
-      setHeadName({ ...headName, error: "Invalid head name." });
-      return;
+
+  const _validateFields = () => {
+    if (!headName.value) {
+      setHeadName({ ...headName, error: "Please enter head name." });
+      return false;
     }
+    if (!census.value || !census.value.name) {
+      setCensus({ ...census, error: "Please select census." });
+      return false;
+    }
+    return true;
+  };
+
+  const _onAddFamily = () => {
     const family = {
       headName: headName.value,
       censusId: Number.parseInt(census.value.id, 10),
@@ -60,7 +65,8 @@ const AddFamily = ({ navigation, dropDownData }, ref) => {
   };
 
   useImperativeHandle(ref, () => ({
-    _onAddFamily
+    _onAddFamily,
+    _validateFields
   }));
 
   return (
@@ -83,6 +89,11 @@ const AddFamily = ({ navigation, dropDownData }, ref) => {
             onChangeText={value => {
               setCensus({ value: value, error: "" });
             }}
+            containerStyle={
+              !!census.error ? { borderColor: "rgb(241, 58, 89)" } : {}
+            }
+            error={!!census.error}
+            errorText={census.error}
           ></Dropdown>
         </ViewWithTitle>
 

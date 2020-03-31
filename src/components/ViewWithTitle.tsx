@@ -14,8 +14,8 @@ const ViewWithTitle = ({ children, ...props }) => {
 const styles = StyleSheet.create({
   container: {
     padding: 5,
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: 15,
+    marginBottom: 15,
     flex: 1,
     width: "100%",
     flexDirection: "column",

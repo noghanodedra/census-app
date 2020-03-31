@@ -1,16 +1,17 @@
 import React, { memo, useState, useRef } from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 
 import { ProgressSteps, ProgressStep } from "components/progress-steps";
-import { Background, BackButton, Header, CenterSpinner } from "components";
+import { Background, BackButton, CenterSpinner } from "components";
 import { theme } from "helpers";
 import { AddFamily } from "features/registration/add-family";
 import { AddIndividual } from "features/registration/add-individual";
+import { Summary } from "features/registration/summary";
+
 import styles from "./styles";
 
 const Registration = ({ ...props }) => {
   const { data } = props.route.params;
-  const [step, setStep] = useState(0);
   const [family, setFamily] = useState({});
 
   const [state, setState] = useState({
@@ -21,28 +22,57 @@ const Registration = ({ ...props }) => {
   let addFamilyCompRef = useRef(null);
   let addIndividualCompRef = useRef(null);
   const onAddFamily = () => {
-    addFamilyCompRef.current
-      ._onAddFamily()
-      .then(({ data }) => {
-        setFamily(data.createFamily);
-      })
-      .catch(e => {
-        console.error(e);
+    const addFamilyPromise = new Promise<boolean>((resolve, reject) => {
+      if (!addFamilyCompRef.current._validateFields()) {
+        console.log("invalid family...form");
         setState({ errors: true, isValid: true });
-      });
+        reject(false);
+        return false;
+      }
+      addFamilyCompRef.current
+        ._onAddFamily()
+        .then(({ data }) => {
+          setFamily(data.createFamily);
+          resolve(true);
+          console.log("added family");
+        })
+        .catch(e => {
+          console.error(e);
+          setState({ errors: true, isValid: true });
+          reject(false);
+        });
+    });
+    return addFamilyPromise;
   };
 
   const onAddIndividual = () => {
-    addIndividualCompRef.current
-      ._onAddIndividual()
-      .then(({ data }) => {
-        console.log(data);
-        //setFamily(data.createFamily);
-      })
-      .catch(e => {
-        console.error(e);
+    const addIndividualPromise = new Promise<boolean>((resolve, reject) => {
+      if (!addIndividualCompRef.current._validateFields()) {
+        console.log("invlaid indiv");
         setState({ errors: true, isValid: true });
-      });
+        reject(false);
+        return false;
+      }
+      addIndividualCompRef.current
+        ._onAddIndividual()
+        .then(({ data }) => {
+          console.log("indiv addded.....");
+          //console.log(data);
+          setTimeout(() => {
+            resolve(true);
+          }, 2000);
+        })
+        .catch(e => {
+          console.error(e);
+          setState({ errors: true, isValid: true });
+          reject(false);
+        });
+    });
+    return addIndividualPromise;
+  };
+
+  const onDone = () => {
+    props.navigation.jumpTo("Home");
   };
 
   const progressStepsStyle = {
@@ -59,15 +89,22 @@ const Registration = ({ ...props }) => {
     fontWeight: "600"
   };
   const buttonStyle = {
-    backgroundColor: theme.colors.primary
+    backgroundColor: theme.colors.primary,
+    borderRadius: 5
+  };
+  const addIndivButtonStyle = {
+    backgroundColor: theme.colors.primary,
+    borderRadius: 5,
+    // padding: 10,
+    //marginLeft: -35,
+    marginRight: 5
   };
 
   return (
     <Background>
       <BackButton goBack={props.navigation.goBack} />
-      <Header>Registration</Header>
       <View style={{ marginTop: 10 }}>
-        <ProgressSteps {...progressStepsStyle} activeStep={step}>
+        <ProgressSteps {...progressStepsStyle}>
           <ProgressStep
             label="Add Family"
             nextBtnText="Add"
@@ -105,13 +142,17 @@ const Registration = ({ ...props }) => {
           </ProgressStep>
           <ProgressStep
             label="Summary"
-            nextBtnText="Done!"
+            finishBtnText="Done"
+            previousBtnText="Add individual"
             nextBtnStyle={buttonStyle}
             nextBtnTextStyle={buttonTextStyle}
-            //previousBtnStyle={{ display: "none" }}
+            previousBtnStyle={addIndivButtonStyle}
+            previousBtnTextStyle={buttonTextStyle}
+            onSubmit={onDone}
+            errors={state.errors}
           >
             <View style={{ alignItems: "center" }}>
-              <Text>This is the content within step 3!</Text>
+              <Summary family={family} navigation={props.navigation}></Summary>
             </View>
           </ProgressStep>
         </ProgressSteps>

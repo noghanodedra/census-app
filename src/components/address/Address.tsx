@@ -6,13 +6,13 @@ import { View } from "react-native";
 
 const Address = ({ ...props }) => {
   const [districts, setDistricts] = useState([]);
-  const [line1, setLine1] = useState({ value: "sf", error: "" });
-  const [line2, setLine2] = useState({ value: "cv", error: "" });
-  const [line3, setLine3] = useState({ value: "ff", error: "" });
+  const [line1, setLine1] = useState({ value: "erer", error: "" });
+  const [line2, setLine2] = useState({ value: "re", error: "" });
+  const [line3, setLine3] = useState({ value: "er", error: "" });
   const [state, setState] = useState({ value: { name: "" }, error: "" });
   const [district, setDistrict] = useState({ value: { name: "" }, error: "" });
-  const [townCity, setTownCity] = useState({ value: "tryty", error: "" });
-  const [postcode, setPostcode] = useState({ value: "5656", error: "" });
+  const [townCity, setTownCity] = useState({ value: "trttrtr", error: "" });
+  const [postcode, setPostcode] = useState({ value: "454545", error: "" });
 
   const { addressData } = props;
 
@@ -23,6 +23,30 @@ const Address = ({ ...props }) => {
   addressData.district = district.value.name;
   addressData.postcode = postcode.value;
   addressData.townCity = townCity.value;
+
+  const _validateFields = () => {
+    if (!line1.value) {
+      setLine1({ ...line1, error: "Please enter Line1." });
+      return false;
+    }
+    if (!townCity.value) {
+      setTownCity({ ...townCity, error: "Please enter Town/Village/City." });
+      return false;
+    }
+    if (!state.value || !state.value.name) {
+      setState({ ...state, error: "Please select state." });
+      return false;
+    }
+    if (!district.value || !district.value.name) {
+      setDistrict({ ...district, error: "Please select district." });
+      return false;
+    }
+    if (!postcode.value) {
+      setPostcode({ ...postcode, error: "Please enter postcode." });
+      return false;
+    }
+    return true;
+  };
 
   return (
     <View style={styles.container}>
@@ -69,6 +93,8 @@ const Address = ({ ...props }) => {
           setDistricts(value.districts);
           setState({ value: value, error: "" });
         }}
+        error={!!state.error}
+        errorText={state.error}
       ></Dropdown>
       <Dropdown
         label="Select district"
@@ -77,6 +103,8 @@ const Address = ({ ...props }) => {
         onChangeText={value => {
           setDistrict({ value: value, error: "" });
         }}
+        error={!!district.error}
+        errorText={district.error}
       ></Dropdown>
       <TextInput
         label="Postcode"
