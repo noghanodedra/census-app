@@ -1,10 +1,12 @@
 import React, { memo } from "react";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
-import { Background, FAB, Paragraph, CenterSpinner } from "components";
-import styles from "./styles";
+import { FAB, Paragraph, CenterSpinner } from "components";
 import { View } from "react-native";
 import { SafeAreaView } from "react-navigation";
+
+import ScreenNames from "constants/screen-names";
+import styles from "./styles";
 
 const GET_DATA = gql`
   {
@@ -94,7 +96,12 @@ const LandingPage = ({ ...props }) => {
           small
           label="Register"
           icon="plus"
-          onPress={() => props.navigationCallBack(data)}
+          onPress={() =>
+            props.navigation.navigate(ScreenNames.REGISTRATION, {
+              data,
+              title: "reg",
+            })
+          }
         />
       </View>
     </SafeAreaView>

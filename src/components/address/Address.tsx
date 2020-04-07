@@ -1,10 +1,10 @@
-import React, { memo, useState } from "react";
+import React, { useState, forwardRef, useImperativeHandle } from "react";
 import { TextInput, Dropdown } from "components";
 
 import styles from "./styles";
 import { View } from "react-native";
 
-const Address = ({ ...props }) => {
+const Address = ({ ...props }, ref) => {
   const [districts, setDistricts] = useState([]);
   const [line1, setLine1] = useState({ value: "erer", error: "" });
   const [line2, setLine2] = useState({ value: "re", error: "" });
@@ -48,13 +48,17 @@ const Address = ({ ...props }) => {
     return true;
   };
 
+  useImperativeHandle(ref, () => ({
+    _validateFields,
+  }));
+
   return (
-    <View style={styles.container}>
+    <View style={styles.container} ref={ref}>
       <TextInput
         label="Line 1"
         returnKeyType="next"
         value={line1.value}
-        onChangeText={text => setLine1({ value: text, error: "" })}
+        onChangeText={(text) => setLine1({ value: text, error: "" })}
         error={!!line1.error}
         errorText={line1.error}
         autoCapitalize="none"
@@ -63,7 +67,7 @@ const Address = ({ ...props }) => {
         label="Line 2 (Optional)"
         returnKeyType="next"
         value={line2.value}
-        onChangeText={text => setLine2({ value: text, error: "" })}
+        onChangeText={(text) => setLine2({ value: text, error: "" })}
         error={!!line2.error}
         errorText={line2.error}
         autoCapitalize="none"
@@ -72,7 +76,7 @@ const Address = ({ ...props }) => {
         label="Line 3 (Optional)"
         returnKeyType="next"
         value={line3.value}
-        onChangeText={text => setLine3({ value: text, error: "" })}
+        onChangeText={(text) => setLine3({ value: text, error: "" })}
         error={!!line3.error}
         errorText={line3.error}
         autoCapitalize="none"
@@ -81,7 +85,7 @@ const Address = ({ ...props }) => {
         label="Town/Village/City"
         returnKeyType="next"
         value={townCity.value}
-        onChangeText={text => setTownCity({ value: text, error: "" })}
+        onChangeText={(text) => setTownCity({ value: text, error: "" })}
         error={!!townCity.error}
         errorText={townCity.error}
         autoCapitalize="none"
@@ -89,7 +93,8 @@ const Address = ({ ...props }) => {
       <Dropdown
         label="Select state"
         data={props.states}
-        onChangeText={value => {
+        onChangeText={(value) => {
+          console.log(value);
           setDistricts(value.districts);
           setState({ value: value, error: "" });
         }}
@@ -100,7 +105,7 @@ const Address = ({ ...props }) => {
         label="Select district"
         data={districts}
         dropdownPosition={2}
-        onChangeText={value => {
+        onChangeText={(value) => {
           setDistrict({ value: value, error: "" });
         }}
         error={!!district.error}
@@ -110,7 +115,7 @@ const Address = ({ ...props }) => {
         label="Postcode"
         returnKeyType="next"
         value={postcode.value}
-        onChangeText={text => setPostcode({ value: text, error: "" })}
+        onChangeText={(text) => setPostcode({ value: text, error: "" })}
         error={!!postcode.error}
         errorText={postcode.error}
         autoCapitalize="none"
@@ -119,4 +124,4 @@ const Address = ({ ...props }) => {
   );
 };
 
-export default memo(Address);
+export default forwardRef(Address);

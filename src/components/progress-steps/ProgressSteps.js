@@ -62,9 +62,9 @@ class ProgressSteps extends Component {
     };
 
     return (
-      <View style={{ flex: 1, width: "100%" }}>
+      <View style={{ flex: 1 }}>
         <View style={styles.stepIcons}>{this.renderStepIcons()}</View>
-        <View style={{ flex: 1, width: "100%", minHeight: "70%" }}>
+        <View style={{ flex: 1, marginBottom: 50 }}>
           {React.cloneElement(this.props.children[this.state.activeStep], {
             setActiveStep: this.setActiveStep,
             activeStep: this.state.activeStep,

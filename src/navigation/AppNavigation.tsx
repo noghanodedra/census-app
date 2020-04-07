@@ -22,6 +22,7 @@ const DrawerNavigator = createDrawerNavigator(
   {
     contentComponent: DrawerContent,
     drawerType: "slide",
+    initialRouteName: "DashBoard",
   }
 );
 

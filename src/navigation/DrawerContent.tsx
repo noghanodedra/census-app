@@ -38,20 +38,7 @@ const DrawerContent = ({ ...props }) => {
               props.navigation.navigate(ScreenNames.PROFILE);
             }}
           />
-          <DrawerItem
-            icon={({ color, size }) => (
-              <MaterialCommunityIcons
-                name="account-outline"
-                color={color}
-                size={size}
-              />
-            )}
-            label="Register"
-            onPress={() => {
-              props.navigation.setParams({ title: ScreenNames.REGISTRATION });
-              props.navigation.navigate(ScreenNames.REGISTRATION);
-            }}
-          />
+
           <DrawerItem
             icon={({ color, size }) => (
               <MaterialCommunityIcons name="tune" color={color} size={size} />

@@ -104,7 +104,7 @@ class ProgressStep extends Component {
     const scrollViewProps = this.props.scrollViewProps || {};
 
     return (
-      <View style={{ flex: 1, width: "100%", flexDirection: "row" }}>
+      <View style={{ flex: 1 }}>
         <ScrollView {...scrollViewProps}>{this.props.children}</ScrollView>
 
         <ProgressButtons

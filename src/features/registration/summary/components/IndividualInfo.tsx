@@ -19,10 +19,10 @@ const IndividualInfo = ({ individual }) => {
     return result;
   };
 
-  const getRowItem = (field: string, data: any) => {
+  const getRowItem = (field: string, index: number, data: any) => {
     if (field.startsWith("_")) return null;
     return (
-      <View style={styles.item}>
+      <View style={styles.item} key={index}>
         <Title style={styles.title}>
           <Text>{getLabel(field)}</Text>
         </Title>
@@ -34,9 +34,10 @@ const IndividualInfo = ({ individual }) => {
   return (
     <View style={styles.container}>
       <ScrollView>
-        {Object.keys(individual).map(key =>
+        {Object.keys(individual).map((key, index) =>
           getRowItem(
             key,
+            index,
             individual[key]["name"] ? individual[key]["name"] : individual[key]
           )
         )}
@@ -48,24 +49,24 @@ const IndividualInfo = ({ individual }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 0,
-    height: 200
+    height: 200,
   },
   item: {
     flex: 0,
     padding: 4,
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   title: {
     fontSize: 14,
     lineHeight: 14,
     fontWeight: "normal",
-    color: theme.colors.secondary
+    color: theme.colors.secondary,
   },
   caption: {
     fontSize: 14,
-    lineHeight: 14
-  }
+    lineHeight: 14,
+  },
 });
 
 export default memo(IndividualInfo);

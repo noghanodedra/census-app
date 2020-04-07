@@ -17,7 +17,7 @@ const Modal = ({ children, ...props }) => {
         </Dialog.Title>
         <Dialog.Content>{children}</Dialog.Content>
         <Dialog.Actions>
-          <Button onPress={_hideDialog}>
+          <Button onPress={_hideDialog} mode="contained">
             {props.closeButtonText ? props.closeButtonText : "Close"}
           </Button>
         </Dialog.Actions>
@@ -28,8 +28,15 @@ const Modal = ({ children, ...props }) => {
 
 const styles = StyleSheet.create({
   title: {
-    color: theme.colors.primary
-  }
+    backgroundColor: theme.colors.primary,
+    color: theme.colors.surface,
+    paddingStart: 25,
+    padding: 5,
+    marginEnd: 0,
+    marginStart: 0,
+    marginTop: 0,
+    marginBottom: 10,
+  },
 });
 
 export default memo(Modal);

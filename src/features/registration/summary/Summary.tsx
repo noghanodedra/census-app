@@ -6,7 +6,7 @@ import {
   CenterSpinner,
   ViewWithTitle,
   DataTable,
-  Modal
+  Modal,
 } from "components";
 import FamilyInfo from "./components/FamilyInfo";
 import IndividualInfo from "./components/IndividualInfo";
@@ -68,24 +68,24 @@ const Summary = ({ navigation, family }) => {
     { numeric: true, name: "Age", width: 30, align: "right" },
     { numeric: true, name: "Education", width: 80, align: "left" },
     { numeric: true, name: "Caste", width: 50, align: "left" },
-    { numeric: true, name: "Relationship", width: 105, align: "left" }
+    { numeric: true, name: "Relationship", width: 105, align: "left" },
   ];
   const fields = [
     { name: "name" },
     { name: "age" },
     { name: "education", nestedProp: "name" },
     { name: "caste", nestedProp: "name" },
-    { name: "relationship", nestedProp: "name" }
+    { name: "relationship", nestedProp: "name" },
   ];
 
-  const _onRowSelected = data => {
+  const _onRowSelected = (data) => {
     setIndividualData(data);
     setShowModal(true);
   };
 
   const FamilyComponent = graphql(GET_FAMILY, {
-    options: { variables: { id: family.id }, fetchPolicy: "network-only" }
-  })(props => {
+    options: { variables: { id: family.id }, fetchPolicy: "network-only" },
+  })((props) => {
     const { error, family } = props.data;
     if (error) {
       console.error(error);

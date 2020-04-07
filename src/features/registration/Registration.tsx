@@ -11,12 +11,13 @@ import { Summary } from "features/registration/summary";
 import styles from "./styles";
 
 const Registration = ({ ...props }) => {
-  const { data } = props.route.params;
+  const { data } = props.navigation.state.params;
+  //let data = {};
   const [family, setFamily] = useState({});
 
   const [state, setState] = useState({
     isValid: false,
-    errors: false
+    errors: false,
   });
 
   let addFamilyCompRef = useRef(null);
@@ -36,7 +37,7 @@ const Registration = ({ ...props }) => {
           resolve(true);
           console.log("added family");
         })
-        .catch(e => {
+        .catch((e) => {
           console.error(e);
           setState({ errors: true, isValid: true });
           reject(false);
@@ -61,7 +62,7 @@ const Registration = ({ ...props }) => {
             resolve(true);
           }, 2000);
         })
-        .catch(e => {
+        .catch((e) => {
           console.error(e);
           setState({ errors: true, isValid: true });
           reject(false);
@@ -81,28 +82,27 @@ const Registration = ({ ...props }) => {
     activeStepIconColor: theme.colors.primary,
     completedStepIconColor: theme.colors.primary,
     completedProgressBarColor: theme.colors.primary,
-    completedCheckColor: theme.colors.surface
+    completedCheckColor: theme.colors.surface,
   };
   const buttonTextStyle = {
     color: theme.colors.surface,
-    fontWeight: "600"
+    fontWeight: "600",
   };
   const buttonStyle = {
     backgroundColor: theme.colors.primary,
-    borderRadius: 5
+    borderRadius: 5,
   };
   const addIndivButtonStyle = {
     backgroundColor: theme.colors.primary,
     borderRadius: 5,
     // padding: 10,
     //marginLeft: -35,
-    marginRight: 5
+    marginRight: 5,
   };
 
   return (
     <Background>
-      <BackButton goBack={props.navigation.goBack} />
-      <View style={{ marginTop: 10 }}>
+      <View style={{ flex: 1, width: "100%", padding: 5, marginTop: -20 }}>
         <ProgressSteps {...progressStepsStyle}>
           <ProgressStep
             label="Add Family"
@@ -113,13 +113,11 @@ const Registration = ({ ...props }) => {
             errors={state.errors}
             previousBtnStyle={{ display: "none" }}
           >
-            <View style={{ alignItems: "center" }}>
-              <AddFamily
-                dropDownData={data}
-                navigation={props.navigation}
-                ref={addFamilyCompRef}
-              ></AddFamily>
-            </View>
+            <AddFamily
+              dropDownData={data}
+              navigation={props.navigation}
+              ref={addFamilyCompRef}
+            ></AddFamily>
           </ProgressStep>
           <ProgressStep
             label="Add Individual"
@@ -130,14 +128,12 @@ const Registration = ({ ...props }) => {
             onNext={onAddIndividual}
             errors={state.errors}
           >
-            <View style={{ alignItems: "center" }}>
-              <AddIndividual
-                dropDownData={data}
-                family={family}
-                navigation={props.navigation}
-                ref={addIndividualCompRef}
-              ></AddIndividual>
-            </View>
+            <AddIndividual
+              dropDownData={data}
+              family={family}
+              navigation={props.navigation}
+              ref={addIndividualCompRef}
+            ></AddIndividual>
           </ProgressStep>
           <ProgressStep
             label="Summary"
@@ -150,9 +146,7 @@ const Registration = ({ ...props }) => {
             onSubmit={onDone}
             errors={state.errors}
           >
-            <View style={{ alignItems: "center" }}>
-              <Summary family={family} navigation={props.navigation}></Summary>
-            </View>
+            <Summary family={family} navigation={props.navigation}></Summary>
           </ProgressStep>
         </ProgressSteps>
       </View>

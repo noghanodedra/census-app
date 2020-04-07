@@ -1,4 +1,9 @@
-import React, { useState, forwardRef, useImperativeHandle } from "react";
+import React, {
+  useState,
+  useRef,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import {
@@ -33,6 +38,9 @@ const AddFamily = ({ navigation, dropDownData }, ref) => {
   });
   const [isLoading, setLoading] = useState(false);
   const [createFamily] = useMutation(ADD_FAMILY);
+
+  let addressCompRef = useRef(null);
+
   const address = {
     line1: "",
     line2: "",
@@ -52,7 +60,7 @@ const AddFamily = ({ navigation, dropDownData }, ref) => {
       setCensus({ ...census, error: "Please select census." });
       return false;
     }
-    return true;
+    return addressCompRef.current._validateFields();
   };
 
   const _onAddFamily = () => {
@@ -89,9 +97,6 @@ const AddFamily = ({ navigation, dropDownData }, ref) => {
             onChangeText={(value) => {
               setCensus({ value: value, error: "" });
             }}
-            containerStyle={
-              !!census.error ? { borderColor: "rgb(241, 58, 89)" } : {}
-            }
             error={!!census.error}
             errorText={census.error}
           ></Dropdown>
@@ -101,6 +106,7 @@ const AddFamily = ({ navigation, dropDownData }, ref) => {
           <Address
             addressData={address}
             states={dropDownData.stateList}
+            ref={addressCompRef}
           ></Address>
         </ViewWithTitle>
 
