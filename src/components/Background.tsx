@@ -7,6 +7,7 @@ const Background = ({ children, ...props }) => (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       {children}
     </KeyboardAvoidingView>
+    <View style={{ height: 60 }} />
   </View>
 );
 

@@ -1,10 +1,17 @@
-import * as React from "react";
+import React, { useEffect, forwardRef } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import NumericInput from "react-native-numeric-input";
 
 import { theme } from "helpers";
+import { scrollToComponentInScrollView } from "helpers/utils";
 
-const NumberInput = ({ ...props }) => {
+const NumberInput = ({ ...props }, ref) => {
+  useEffect(() => {
+    if (props.errorText && ref && props.scrollViewRef) {
+      scrollToComponentInScrollView(props.scrollViewRef, ref);
+    }
+  }, [props.errorText]);
+
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{props.label}</Text>
@@ -20,6 +27,7 @@ const NumberInput = ({ ...props }) => {
         }
         rounded
         iconStyle={{ color: "white" }}
+        autoCapitalize="none"
         onChange={props.onChange}
         {...props}
       ></NumericInput>
@@ -36,26 +44,26 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     marginBottom: 10,
-    marginTop: 12
+    marginTop: 12,
   },
   label: {
     marginStart: 4,
     marginEnd: 10,
     fontSize: 16,
     marginVertical: 8,
-    color: theme.colors.placeholder
+    color: theme.colors.placeholder,
   },
   iconStyle: { color: "white" },
   error: {
     fontSize: 14,
     color: theme.colors.error,
     paddingHorizontal: 4,
-    paddingTop: 4
+    paddingTop: 4,
   },
   break: {
     flexBasis: "100%",
-    flexGrow: 0
-  }
+    flexGrow: 0,
+  },
 });
 
-export default NumberInput;
+export default forwardRef(NumberInput);

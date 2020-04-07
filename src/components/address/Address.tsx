@@ -14,7 +14,7 @@ const Address = ({ ...props }, ref) => {
   const [townCity, setTownCity] = useState({ value: "trttrtr", error: "" });
   const [postcode, setPostcode] = useState({ value: "454545", error: "" });
 
-  const { addressData } = props;
+  const { addressData, scrollViewRef } = props;
 
   addressData.line1 = line1.value;
   addressData.line2 = line2.value;
@@ -62,6 +62,8 @@ const Address = ({ ...props }, ref) => {
         error={!!line1.error}
         errorText={line1.error}
         autoCapitalize="none"
+        scrollViewRef={scrollViewRef}
+        ref={React.createRef()}
       />
       <TextInput
         label="Line 2 (Optional)"
@@ -71,6 +73,8 @@ const Address = ({ ...props }, ref) => {
         error={!!line2.error}
         errorText={line2.error}
         autoCapitalize="none"
+        scrollViewRef={scrollViewRef}
+        ref={React.createRef()}
       />
       <TextInput
         label="Line 3 (Optional)"
@@ -80,6 +84,8 @@ const Address = ({ ...props }, ref) => {
         error={!!line3.error}
         errorText={line3.error}
         autoCapitalize="none"
+        scrollViewRef={scrollViewRef}
+        ref={React.createRef()}
       />
       <TextInput
         label="Town/Village/City"
@@ -89,17 +95,20 @@ const Address = ({ ...props }, ref) => {
         error={!!townCity.error}
         errorText={townCity.error}
         autoCapitalize="none"
+        scrollViewRef={scrollViewRef}
+        ref={React.createRef()}
       />
       <Dropdown
         label="Select state"
         data={props.states}
         onChangeText={(value) => {
-          console.log(value);
           setDistricts(value.districts);
           setState({ value: value, error: "" });
         }}
         error={!!state.error}
         errorText={state.error}
+        scrollViewRef={scrollViewRef}
+        ref={React.createRef()}
       ></Dropdown>
       <Dropdown
         label="Select district"
@@ -110,6 +119,8 @@ const Address = ({ ...props }, ref) => {
         }}
         error={!!district.error}
         errorText={district.error}
+        scrollViewRef={scrollViewRef}
+        ref={React.createRef()}
       ></Dropdown>
       <TextInput
         label="Postcode"
@@ -119,6 +130,8 @@ const Address = ({ ...props }, ref) => {
         error={!!postcode.error}
         errorText={postcode.error}
         autoCapitalize="none"
+        scrollViewRef={scrollViewRef}
+        ref={React.createRef()}
       />
     </View>
   );

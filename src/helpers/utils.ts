@@ -1,4 +1,4 @@
-import { AsyncStorage } from "react-native";
+import { AsyncStorage, findNodeHandle } from "react-native";
 import { ApolloError } from "apollo-client";
 
 const AUTH_TOKEN = "AUTH_TOKEN";
@@ -14,7 +14,7 @@ export const getToken = async () => {
   return token;
 };
 
-export const signIn = newToken => {
+export const signIn = (newToken) => {
   token = newToken;
   return AsyncStorage.setItem(AUTH_TOKEN, newToken);
 };
@@ -29,7 +29,7 @@ export const getUser = async () => {
   return JSON.parse(user) || {};
 };
 
-export const setUser = user => {
+export const setUser = (user) => {
   return AsyncStorage.setItem(USER_DETAILS, JSON.stringify(user));
 };
 
@@ -37,7 +37,7 @@ export const removeUser = () => {
   return AsyncStorage.removeItem(USER_DETAILS);
 };
 
-export const emailValidator = email => {
+export const emailValidator = (email) => {
   const re = /\S+@\S+\.\S+/;
 
   if (!email || email.length <= 0) return "Email cannot be empty.";
@@ -46,13 +46,13 @@ export const emailValidator = email => {
   return "";
 };
 
-export const passwordValidator = password => {
+export const passwordValidator = (password) => {
   if (!password || password.length <= 0) return "Password cannot be empty.";
 
   return "";
 };
 
-export const nameValidator = name => {
+export const nameValidator = (name) => {
   if (!name || name.length <= 0) return "Name cannot be empty.";
 
   return "";
@@ -68,6 +68,39 @@ export const extractNetworkErrorMessage = (error: ApolloError) => {
   return errorMessage;
 };
 
+export const scrollToComponentInScrollView11 = (
+  scrollViewRef,
+  componentRef
+) => {
+  if (scrollViewRef) {
+    setTimeout(() => {
+      try {
+        const scrollResponder = scrollViewRef.getScrollResponder();
+
+        scrollResponder.scrollResponderScrollNativeHandleToKeyboard(
+          findNodeHandle(componentRef),
+          100,
+          true
+        );
+      } catch (err) {
+        console.log("error", err);
+      }
+    }, 50);
+  }
+};
+
+export const scrollToComponentInScrollView = (scrollViewRef, componentRef) => {
+  if (scrollViewRef && componentRef) {
+    componentRef.current.measureLayout(
+      findNodeHandle(scrollViewRef.current),
+      (x, y) => {
+        console.log("x", x, "y", y);
+        scrollViewRef.current.scrollTo({ x: 0, y: y, animated: true });
+      }
+    );
+  }
+};
+
 export default {
   getToken,
   signIn,
@@ -79,5 +112,6 @@ export default {
   passwordValidator,
   nameValidator,
   extractGQLErrorMessage,
-  extractNetworkErrorMessage
+  extractNetworkErrorMessage,
+  scrollToComponentInScrollView,
 };

@@ -27,7 +27,7 @@ const ADD_FAMILY = gql`
   }
 `;
 
-const AddFamily = ({ navigation, dropDownData }, ref) => {
+const AddFamily = ({ navigation, dropDownData, scrollViewRef }, ref) => {
   const [headName, setHeadName] = useState({
     value: "test",
     error: "",
@@ -89,6 +89,8 @@ const AddFamily = ({ navigation, dropDownData }, ref) => {
             error={!!headName.error}
             errorText={headName.error}
             autoCapitalize="none"
+            scrollViewRef={scrollViewRef}
+            ref={React.createRef()}
           />
           <Dropdown
             label="Select census"
@@ -99,6 +101,8 @@ const AddFamily = ({ navigation, dropDownData }, ref) => {
             }}
             error={!!census.error}
             errorText={census.error}
+            scrollViewRef={scrollViewRef}
+            ref={React.createRef()}
           ></Dropdown>
         </ViewWithTitle>
 
@@ -106,6 +110,7 @@ const AddFamily = ({ navigation, dropDownData }, ref) => {
           <Address
             addressData={address}
             states={dropDownData.stateList}
+            scrollViewRef={scrollViewRef}
             ref={addressCompRef}
           ></Address>
         </ViewWithTitle>

@@ -22,6 +22,10 @@ const Registration = ({ ...props }) => {
 
   let addFamilyCompRef = useRef(null);
   let addIndividualCompRef = useRef(null);
+
+  let familyScrollViewRef = useRef(null);
+  let individualScrollViewRef = useRef(null);
+
   const onAddFamily = () => {
     const addFamilyPromise = new Promise<boolean>((resolve, reject) => {
       if (!addFamilyCompRef.current._validateFields()) {
@@ -112,11 +116,13 @@ const Registration = ({ ...props }) => {
             onNext={onAddFamily}
             errors={state.errors}
             previousBtnStyle={{ display: "none" }}
+            scrollViewProps={{ ref: familyScrollViewRef, scrollToTop: true }}
           >
             <AddFamily
               dropDownData={data}
               navigation={props.navigation}
               ref={addFamilyCompRef}
+              scrollViewRef={familyScrollViewRef}
             ></AddFamily>
           </ProgressStep>
           <ProgressStep
@@ -127,12 +133,17 @@ const Registration = ({ ...props }) => {
             previousBtnStyle={{ display: "none" }}
             onNext={onAddIndividual}
             errors={state.errors}
+            scrollViewProps={{
+              ref: individualScrollViewRef,
+              scrollToTop: true,
+            }}
           >
             <AddIndividual
               dropDownData={data}
               family={family}
               navigation={props.navigation}
               ref={addIndividualCompRef}
+              scrollViewRef={individualScrollViewRef}
             ></AddIndividual>
           </ProgressStep>
           <ProgressStep

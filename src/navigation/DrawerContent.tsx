@@ -20,7 +20,7 @@ const DrawerContent = ({ ...props }) => {
             )}
             label="Home"
             onPress={() => {
-              props.navigation.setParams({ title: ScreenNames.DASHBOARD });
+              props.navigation.setParams({ title: "Home" });
               props.navigation.navigate(ScreenNames.DASHBOARD);
             }}
           />

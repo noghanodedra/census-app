@@ -53,7 +53,6 @@ const Login = ({ navigation }) => {
         console.log(data);
         setLoading(false);
         setUser(data.login.profile);
-        //navigation.navigate(ScreenNames.DASHBOARD);
         navigation.navigate("App");
       })
       .catch((e) => {
@@ -100,7 +99,7 @@ const Login = ({ navigation }) => {
 
       <View style={styles.forgotPassword}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("ForgotPasswordScreen")}
+          onPress={() => navigation.navigate(ScreenNames.FORGOT_PASSWORD)}
         >
           <Text style={styles.label}>Forgot password?</Text>
         </TouchableOpacity>

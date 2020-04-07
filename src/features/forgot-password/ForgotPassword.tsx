@@ -7,7 +7,7 @@ import {
   Background,
   Header,
   Logo,
-  TextInput
+  TextInput,
 } from "components";
 import ScreenNames from "constants/screen-names";
 
@@ -23,23 +23,20 @@ const ForgotPassword = ({ navigation }) => {
       setEmail({ ...email, error: emailError });
       return;
     }
-
     navigation.navigate(ScreenNames.LOGIN);
   };
 
   return (
     <Background>
       <BackButton goBack={() => navigation.navigate(ScreenNames.LOGIN)} />
-
       <Logo />
-
       <Header>Restore Password</Header>
 
       <TextInput
         label="E-mail address"
         returnKeyType="done"
         value={email.value}
-        onChangeText={text => setEmail({ value: text, error: "" })}
+        onChangeText={(text) => setEmail({ value: text, error: "" })}
         error={!!email.error}
         errorText={email.error}
         autoCapitalize="none"
