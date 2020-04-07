@@ -10,6 +10,8 @@ import makeApolloClient from "helpers/apollo";
 import CenterSpinner from "components/CenterSpinner";
 import { getToken } from "helpers/utils";
 
+console.disableYellowBox = true;
+
 const Main = () => {
   const [client, setClient] = React.useState(null);
   const fetchSession = async () => {

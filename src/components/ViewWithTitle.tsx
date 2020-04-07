@@ -13,7 +13,7 @@ const ViewWithTitle = ({ children, ...props }) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 5,
+    padding: 10,
     marginTop: 15,
     marginBottom: 15,
     flex: 1,
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     borderColor: theme.colors.secondary,
     borderWidth: 1,
-    borderRadius: 3
+    borderRadius: 3,
   },
   title: {
     color: theme.colors.primary,
@@ -31,8 +31,10 @@ const styles = StyleSheet.create({
     paddingEnd: 6,
     position: "absolute",
     top: -10,
-    left: 0
-  }
+    left: 0,
+    fontSize: 15,
+    fontWeight: "500",
+  },
 });
 
 export default memo(ViewWithTitle);

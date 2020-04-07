@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { View } from 'react-native';
-import { times } from 'lodash';
+import { times } from "lodash";
+import React, { Component } from "react";
+import { View } from "react-native";
 
-import StepIcon from './StepIcon';
+import StepIcon from "./StepIcon";
 
 class ProgressSteps extends Component {
   state = {
     stepCount: 0,
-    activeStep: this.props.activeStep || 0
+    activeStep: this.props.activeStep || 0,
   };
 
   componentDidMount() {
@@ -52,23 +52,23 @@ class ProgressSteps extends Component {
   render() {
     const styles = {
       stepIcons: {
-        position: 'relative',
-        justifyContent: 'space-evenly',
-        alignSelf: 'center',
-        flexDirection: 'row',
+        position: "relative",
+        justifyContent: "space-evenly",
+        alignSelf: "center",
+        flexDirection: "row",
         top: 30,
-        marginBottom: 50
-      }
+        marginBottom: 50,
+      },
     };
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, width: "100%" }}>
         <View style={styles.stepIcons}>{this.renderStepIcons()}</View>
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, width: "100%", minHeight: "70%" }}>
           {React.cloneElement(this.props.children[this.state.activeStep], {
             setActiveStep: this.setActiveStep,
             activeStep: this.state.activeStep,
-            stepCount: this.state.stepCount
+            stepCount: this.state.stepCount,
           })}
         </View>
       </View>

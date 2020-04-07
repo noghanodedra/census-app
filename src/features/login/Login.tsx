@@ -10,15 +10,10 @@ import {
   CenterSpinner,
   Header,
   Logo,
-  TextInput
+  TextInput,
 } from "components";
 
-import {
-  emailValidator,
-  passwordValidator,
-  extractGQLErrorMessage,
-  setUser
-} from "helpers/utils";
+import { emailValidator, passwordValidator, setUser } from "helpers/utils";
 import styles from "./styles";
 import ScreenNames from "constants/screen-names";
 
@@ -58,18 +53,10 @@ const Login = ({ navigation }) => {
         console.log(data);
         setLoading(false);
         setUser(data.login.profile);
-        navigation.navigate(ScreenNames.DASHBOARD);
+        //navigation.navigate(ScreenNames.DASHBOARD);
+        navigation.navigate("App");
       })
-      .catch(e => {
-        console.log(extractGQLErrorMessage(e));
-        console.log(e);
-        if (e.networkError) {
-          console.log("Erro na requisição.");
-        } else {
-          e.graphQLErrors.forEach(err => {
-            console.log(err.message);
-          });
-        }
+      .catch((e) => {
         // If the error message contains email or password we'll assume that's the error.
         if (/email/i.test(e.message)) {
           //this.setState({ emailError: true });
@@ -93,7 +80,7 @@ const Login = ({ navigation }) => {
         label="Email"
         returnKeyType="next"
         value={email.value}
-        onChangeText={text => setEmail({ value: text, error: "" })}
+        onChangeText={(text) => setEmail({ value: text, error: "" })}
         error={!!email.error}
         errorText={email.error}
         autoCapitalize="none"
@@ -105,7 +92,7 @@ const Login = ({ navigation }) => {
         label="Password"
         returnKeyType="done"
         value={password.value}
-        onChangeText={text => setPassword({ value: text, error: "" })}
+        onChangeText={(text) => setPassword({ value: text, error: "" })}
         error={!!password.error}
         errorText={password.error}
         secureTextEntry
@@ -115,7 +102,7 @@ const Login = ({ navigation }) => {
         <TouchableOpacity
           onPress={() => navigation.navigate("ForgotPasswordScreen")}
         >
-          <Text style={styles.label}>Forgot your password?</Text>
+          <Text style={styles.label}>Forgot password?</Text>
         </TouchableOpacity>
       </View>
 

@@ -1,11 +1,11 @@
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import { StyleSheet } from "react-native";
 import { Appbar } from "react-native-paper";
+import { DrawerActions } from "react-navigation-drawer";
 
 import { theme } from "helpers";
 
-const CustomAppbar = ({ previous, navigation }) => {
-  const title = "Home";
+const CustomAppbar = ({ previous, title, navigation }) => {
   return (
     <Appbar.Header theme={{ colors: { primary: theme.colors.primary } }}>
       {previous ? (
@@ -17,7 +17,7 @@ const CustomAppbar = ({ previous, navigation }) => {
         <Appbar.Action
           icon="menu"
           onPress={() => {
-            navigation.openDrawer();
+            navigation.dispatch(DrawerActions.toggleDrawer());
           }}
         />
       )}
@@ -32,12 +32,12 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.primary,
     fontWeight: "bold",
     paddingVertical: 14,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   content: {
     textAlign: "center",
-    color: theme.colors.secondary
-  }
+    color: theme.colors.secondary,
+  },
 });
 
 export default memo(CustomAppbar);

@@ -1,16 +1,12 @@
-import React, { memo } from 'react';
-import { Image, StyleSheet } from 'react-native';
+import React, { memo } from "react";
+import { StyleSheet } from "react-native";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { theme } from "helpers";
 
 const Logo = () => (
-  <Image source={require('../assets/logo.png')} style={styles.image} />
+  <Ionicons name="md-people" size={80} color={theme.colors.primary} />
 );
 
-const styles = StyleSheet.create({
-  image: {
-    width: 128,
-    height: 128,
-    marginBottom: 12,
-  },
-});
+const styles = StyleSheet.create({});
 
 export default memo(Logo);

@@ -1,6 +1,6 @@
+import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { View, ScrollView, TouchableOpacity, Text } from "react-native";
-import PropTypes from "prop-types";
 
 import ProgressButtons from "./ProgressButtons";
 
@@ -31,17 +31,17 @@ class ProgressStep extends Component {
       //textAlign: "center",
       alignContent: "center",
       padding: 8,
-      ...this.props.nextBtnStyle
+      ...this.props.nextBtnStyle,
     };
 
     const btnTextStyle = {
       color: "#007AFF",
       fontSize: 18,
-      ...this.props.nextBtnTextStyle
+      ...this.props.nextBtnTextStyle,
     };
 
     const disabledBtnText = {
-      color: "#cdcdcd"
+      color: "#cdcdcd",
     };
 
     let textStyle = [btnTextStyle];
@@ -71,17 +71,17 @@ class ProgressStep extends Component {
       //textAlign: 'center',
       alignContent: "center",
       padding: 8,
-      ...this.props.previousBtnStyle
+      ...this.props.previousBtnStyle,
     };
 
     const btnTextStyle = {
       color: "#007AFF",
       fontSize: 18,
-      ...this.props.previousBtnTextStyle
+      ...this.props.previousBtnTextStyle,
     };
 
     const disabledBtnText = {
-      color: "#cdcdcd"
+      color: "#cdcdcd",
     };
 
     let textStyle = [btnTextStyle];
@@ -104,7 +104,7 @@ class ProgressStep extends Component {
     const scrollViewProps = this.props.scrollViewProps || {};
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, width: "100%", flexDirection: "row" }}>
         <ScrollView {...scrollViewProps}>{this.props.children}</ScrollView>
 
         <ProgressButtons
@@ -133,7 +133,7 @@ ProgressStep.propTypes = {
   previousBtnTextStyle: PropTypes.object,
   previousBtnDisabled: PropTypes.bool,
   scrollViewProps: PropTypes.object,
-  errors: PropTypes.bool
+  errors: PropTypes.bool,
 };
 
 ProgressStep.defaultProps = {
@@ -142,7 +142,7 @@ ProgressStep.defaultProps = {
   finishBtnText: "Submit",
   nextBtnDisabled: false,
   previousBtnDisabled: false,
-  errors: false
+  errors: false,
 };
 
 export default ProgressStep;

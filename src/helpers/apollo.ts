@@ -2,14 +2,14 @@ import ApolloClient, { InMemoryCache } from "apollo-boost";
 
 const makeApolloClient = () => {
   const client = new ApolloClient({
-    uri: `http://192.168.43.37:4000/graphql`,
+    uri: `http://192.168.43.7:4000/graphql`,
     cache: new InMemoryCache(),
     credentials: "include",
-    request: async operation => {
+    request: async (operation) => {
       operation.setContext({
         fetchOptions: {
-          credentials: "include"
-        }
+          credentials: "include",
+        },
       });
     },
     onError: ({ graphQLErrors, networkError, operation, forward }) => {
@@ -26,9 +26,9 @@ const makeApolloClient = () => {
               const headers = operation.getContext().headers;
               operation.setContext({
                 headers: {
-                  ...headers
+                  ...headers,
                   //authorization: getNewToken(),
-                }
+                },
               });
               // Now, pass the modified operation to the next link
               // in the chain. This effectively intercepts the old
@@ -41,7 +41,7 @@ const makeApolloClient = () => {
           }
         }
       }
-    }
+    },
   });
   return client;
 };

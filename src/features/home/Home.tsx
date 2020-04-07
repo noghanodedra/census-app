@@ -6,11 +6,9 @@ import ScreenNames from "constants/screen-names";
 const Home = ({ navigation }) => (
   <Background>
     <Logo />
-    <Header>Census - The register</Header>
+    <Header>Census</Header>
 
-    <Paragraph>
-      The easiest way to start with your amazing application.
-    </Paragraph>
+    <Paragraph>The population register.</Paragraph>
     <Button
       mode="contained"
       onPress={() => navigation.navigate(ScreenNames.LOGIN)}

@@ -57,7 +57,6 @@ const Registration = ({ ...props }) => {
         ._onAddIndividual()
         .then(({ data }) => {
           console.log("indiv addded.....");
-          //console.log(data);
           setTimeout(() => {
             resolve(true);
           }, 2000);

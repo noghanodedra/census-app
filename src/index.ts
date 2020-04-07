@@ -1,19 +1,17 @@
-import { createAppContainer } from "react-navigation";
-import { createStackNavigator } from "react-navigation-stack";
-import { Home, Login, SignUp, ForgotPassword, DashBoard } from "features";
+import { createSwitchNavigator, createAppContainer } from "react-navigation";
 
-const Router = createStackNavigator(
+import { AuthNavigation, AppNavigation } from "navigation";
+
+const SwitchNavigator = createSwitchNavigator(
   {
-    Home,
-    Login,
-    SignUp,
-    ForgotPassword,
-    DashBoard
+    Auth: AuthNavigation,
+    App: AppNavigation,
   },
   {
-    initialRouteName: "DashBoard", //"DashBoard",//'Home',
-    headerMode: "none"
+    initialRouteName: "Auth",
   }
 );
 
-export default createAppContainer(Router);
+const AppContainer = createAppContainer(SwitchNavigator);
+
+export default AppContainer;

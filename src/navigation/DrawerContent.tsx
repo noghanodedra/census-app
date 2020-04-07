@@ -6,6 +6,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { theme } from "helpers";
 import { UserInfo, LogoutDrawerItem } from "components";
+import ScreenNames from "constants/screen-names";
 
 const DrawerContent = ({ ...props }) => {
   return (
@@ -15,6 +16,16 @@ const DrawerContent = ({ ...props }) => {
         <Drawer.Section>
           <DrawerItem
             icon={({ color, size }) => (
+              <MaterialCommunityIcons name="home" color={color} size={size} />
+            )}
+            label="Home"
+            onPress={() => {
+              props.navigation.setParams({ title: ScreenNames.DASHBOARD });
+              props.navigation.navigate(ScreenNames.DASHBOARD);
+            }}
+          />
+          <DrawerItem
+            icon={({ color, size }) => (
               <MaterialCommunityIcons
                 name="account-outline"
                 color={color}
@@ -22,7 +33,24 @@ const DrawerContent = ({ ...props }) => {
               />
             )}
             label="Profile"
-            onPress={() => {}}
+            onPress={() => {
+              props.navigation.setParams({ title: ScreenNames.PROFILE });
+              props.navigation.navigate(ScreenNames.PROFILE);
+            }}
+          />
+          <DrawerItem
+            icon={({ color, size }) => (
+              <MaterialCommunityIcons
+                name="account-outline"
+                color={color}
+                size={size}
+              />
+            )}
+            label="Register"
+            onPress={() => {
+              props.navigation.setParams({ title: ScreenNames.REGISTRATION });
+              props.navigation.navigate(ScreenNames.REGISTRATION);
+            }}
           />
           <DrawerItem
             icon={({ color, size }) => (
@@ -60,28 +88,28 @@ export default DrawerContent;
 
 const styles = StyleSheet.create({
   drawerContent: {
-    flex: 1
+    flex: 1,
   },
   userInfoSection: {
     paddingLeft: 10,
     flex: 1,
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   title: {
     marginTop: 10,
     fontWeight: "bold",
-    color: theme.colors.secondary
+    color: theme.colors.secondary,
   },
   drawerItem: {
-    color: theme.colors.secondary
+    color: theme.colors.secondary,
   },
   caption: {
     fontSize: 14,
-    lineHeight: 14
+    lineHeight: 14,
   },
   drawerSection: {
-    marginTop: 10
-  }
+    marginTop: 10,
+  },
 });

@@ -42,6 +42,7 @@
     "react-native-vector-icons": "^6.6.0",
     "react-native-web": "~0.11.7",
     "react-navigation": "^4.3.1",
+    "react-navigation-drawer": "^2.4.11",
     "react-navigation-stack": "^1.10.2"
   },
   "devDependencies": {

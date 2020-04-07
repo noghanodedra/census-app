@@ -7,7 +7,7 @@ import {
   ViewWithTitle,
   TextInput,
   Address,
-  Dropdown
+  Dropdown,
 } from "components";
 
 import styles from "./styles";
@@ -25,11 +25,11 @@ const ADD_FAMILY = gql`
 const AddFamily = ({ navigation, dropDownData }, ref) => {
   const [headName, setHeadName] = useState({
     value: "test",
-    error: ""
+    error: "",
   });
   const [census, setCensus] = useState({
     value: { name: "", id: "0" },
-    error: ""
+    error: "",
   });
   const [isLoading, setLoading] = useState(false);
   const [createFamily] = useMutation(ADD_FAMILY);
@@ -40,7 +40,7 @@ const AddFamily = ({ navigation, dropDownData }, ref) => {
     state: "",
     district: "",
     townCity: "",
-    postcode: ""
+    postcode: "",
   };
 
   const _validateFields = () => {
@@ -59,14 +59,14 @@ const AddFamily = ({ navigation, dropDownData }, ref) => {
     const family = {
       headName: headName.value,
       censusId: Number.parseInt(census.value.id, 10),
-      address: address
+      address: address,
     };
     return createFamily({ variables: { family } });
   };
 
   useImperativeHandle(ref, () => ({
     _onAddFamily,
-    _validateFields
+    _validateFields,
   }));
 
   return (
@@ -77,7 +77,7 @@ const AddFamily = ({ navigation, dropDownData }, ref) => {
             label="Head Name"
             returnKeyType="next"
             value={headName.value}
-            onChangeText={text => setHeadName({ value: text, error: "" })}
+            onChangeText={(text) => setHeadName({ value: text, error: "" })}
             error={!!headName.error}
             errorText={headName.error}
             autoCapitalize="none"
@@ -86,7 +86,7 @@ const AddFamily = ({ navigation, dropDownData }, ref) => {
             label="Select census"
             data={dropDownData.censusList}
             dropdownPosition={2}
-            onChangeText={value => {
+            onChangeText={(value) => {
               setCensus({ value: value, error: "" });
             }}
             containerStyle={
@@ -104,9 +104,6 @@ const AddFamily = ({ navigation, dropDownData }, ref) => {
           ></Address>
         </ViewWithTitle>
 
-        {/*<Button mode="contained" onPress={_onAddButtonPressed}>
-          Add
-          </Button>*/}
         {isLoading ? <CenterSpinner overlay="true"></CenterSpinner> : null}
       </Background>
     </View>
