@@ -1,5 +1,5 @@
-import React, { useRef, useEffect, forwardRef } from "react";
-import { StyleSheet, View, Text, findNodeHandle } from "react-native";
+import React, { useEffect, forwardRef } from "react";
+import { StyleSheet, View, Text } from "react-native";
 import { Dropdown as MaterialDropdown } from "react-native-material-dropdown";
 
 import { scrollToComponentInScrollView } from "helpers/utils";
@@ -7,10 +7,10 @@ import { theme } from "helpers";
 
 const Dropdown = ({ ...props }, ref) => {
   useEffect(() => {
-    if (props.error && ref && props.scrollViewRef) {
+    if (props.errorText && ref && props.scrollViewRef) {
       scrollToComponentInScrollView(props.scrollViewRef, ref);
     }
-  }, [props.error]);
+  });
 
   return (
     <View style={styles.container} ref={ref}>

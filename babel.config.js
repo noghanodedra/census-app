@@ -12,15 +12,17 @@ module.exports = function(api) {
             features: "./src/features",
             helpers: "./src/helpers",
             navigation: "./src/navigation",
-            styles: "./src/styles"
-          }
-        }
-      ]
+            styles: "./src/styles",
+            contexts: "./src/contexts/",
+            hooks: "./src/hooks/",
+          },
+        },
+      ],
     ],
     env: {
       production: {
-        plugins: ["react-native-paper/babel"]
-      }
-    }
+        plugins: ["react-native-paper/babel"],
+      },
+    },
   };
 };

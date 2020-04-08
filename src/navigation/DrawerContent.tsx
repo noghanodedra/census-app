@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, StyleSheet } from "react-native";
 import { DrawerItem, DrawerContentScrollView } from "@react-navigation/drawer";
 import { Drawer } from "react-native-paper";
@@ -7,8 +7,11 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { theme } from "helpers";
 import { UserInfo, LogoutDrawerItem } from "components";
 import ScreenNames from "constants/screen-names";
+import { HeaderTitleContext } from "contexts";
 
 const DrawerContent = ({ ...props }) => {
+  const { setHeaderTitle } = useContext(HeaderTitleContext);
+
   return (
     <DrawerContentScrollView {...props}>
       <UserInfo />
@@ -20,7 +23,7 @@ const DrawerContent = ({ ...props }) => {
             )}
             label="Home"
             onPress={() => {
-              props.navigation.setParams({ title: "Home" });
+              setHeaderTitle("Home");
               props.navigation.navigate(ScreenNames.DASHBOARD);
             }}
           />
@@ -34,7 +37,7 @@ const DrawerContent = ({ ...props }) => {
             )}
             label="Profile"
             onPress={() => {
-              props.navigation.setParams({ title: ScreenNames.PROFILE });
+              setHeaderTitle(ScreenNames.PROFILE);
               props.navigation.navigate(ScreenNames.PROFILE);
             }}
           />

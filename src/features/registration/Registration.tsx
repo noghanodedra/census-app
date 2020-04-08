@@ -1,18 +1,17 @@
-import React, { memo, useState, useRef } from "react";
+import React, { memo, useState, useRef, useEffect } from "react";
 import { View } from "react-native";
 
 import { ProgressSteps, ProgressStep } from "components/progress-steps";
-import { Background, BackButton, CenterSpinner } from "components";
+import { Background, CenterSpinner } from "components";
+import { showSuccesToast, showErrorToast } from "components/UIUtilities";
 import { theme } from "helpers";
 import { AddFamily } from "features/registration/add-family";
 import { AddIndividual } from "features/registration/add-individual";
 import { Summary } from "features/registration/summary";
-
-import styles from "./styles";
+import ScreenNames from "constants/screen-names";
 
 const Registration = ({ ...props }) => {
   const { data } = props.navigation.state.params;
-  //let data = {};
   const [family, setFamily] = useState({});
 
   const [state, setState] = useState({
@@ -29,7 +28,7 @@ const Registration = ({ ...props }) => {
   const onAddFamily = () => {
     const addFamilyPromise = new Promise<boolean>((resolve, reject) => {
       if (!addFamilyCompRef.current._validateFields()) {
-        console.log("invalid family...form");
+        showErrorToast("Some of the field(s) are invalid.");
         setState({ errors: true, isValid: true });
         reject(false);
         return false;
@@ -39,7 +38,7 @@ const Registration = ({ ...props }) => {
         .then(({ data }) => {
           setFamily(data.createFamily);
           resolve(true);
-          console.log("added family");
+          showSuccesToast("Family added.");
         })
         .catch((e) => {
           console.error(e);
@@ -53,7 +52,7 @@ const Registration = ({ ...props }) => {
   const onAddIndividual = () => {
     const addIndividualPromise = new Promise<boolean>((resolve, reject) => {
       if (!addIndividualCompRef.current._validateFields()) {
-        console.log("invlaid indiv");
+        showErrorToast("Some of the field(s) are invalid.");
         setState({ errors: true, isValid: true });
         reject(false);
         return false;
@@ -61,10 +60,8 @@ const Registration = ({ ...props }) => {
       addIndividualCompRef.current
         ._onAddIndividual()
         .then(({ data }) => {
-          console.log("indiv addded.....");
-          setTimeout(() => {
-            resolve(true);
-          }, 2000);
+          showSuccesToast("Individual added.");
+          resolve(true);
         })
         .catch((e) => {
           console.error(e);
@@ -76,7 +73,7 @@ const Registration = ({ ...props }) => {
   };
 
   const onDone = () => {
-    props.navigation.jumpTo("Home");
+    props.navigation.navigate(ScreenNames.DASHBOARD);
   };
 
   const progressStepsStyle = {
@@ -99,10 +96,14 @@ const Registration = ({ ...props }) => {
   const addIndivButtonStyle = {
     backgroundColor: theme.colors.primary,
     borderRadius: 5,
-    // padding: 10,
-    //marginLeft: -35,
     marginRight: 5,
   };
+
+  useEffect(() => {
+    props.navigation.setParams({
+      title: ScreenNames.REGISTRATION,
+    });
+  }, []);
 
   return (
     <Background>

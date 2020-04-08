@@ -53,7 +53,7 @@ const Login = ({ navigation }) => {
         console.log(data);
         setLoading(false);
         setUser(data.login.profile);
-        navigation.navigate("App");
+        navigation.navigate(ScreenNames.APP);
       })
       .catch((e) => {
         // If the error message contains email or password we'll assume that's the error.

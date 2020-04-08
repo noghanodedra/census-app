@@ -149,9 +149,16 @@ const AddIndividual = (
     }
 
     if (incomeClass.value === 0) {
-      setGender({
+      setIncomeClass({
         ...incomeClass,
         error: "Please select income class.",
+      });
+      return false;
+    }
+    if (maritalStatus.value === 0) {
+      setMaritalStatus({
+        ...maritalStatus,
+        error: "Please select marital status.",
       });
       return false;
     }

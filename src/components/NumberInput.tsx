@@ -10,10 +10,10 @@ const NumberInput = ({ ...props }, ref) => {
     if (props.errorText && ref && props.scrollViewRef) {
       scrollToComponentInScrollView(props.scrollViewRef, ref);
     }
-  }, [props.errorText]);
+  });
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} ref={ref}>
       <Text style={styles.label}>{props.label}</Text>
       <NumericInput
         upDownButtonsBackgroundColor={

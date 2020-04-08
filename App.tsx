@@ -9,6 +9,7 @@ import { theme } from "helpers/theme";
 import makeApolloClient from "helpers/apollo";
 import CenterSpinner from "components/CenterSpinner";
 import { getToken } from "helpers/utils";
+import { headerTitleContext } from "helpers/HeaderTitle.context";
 
 console.disableYellowBox = true;
 
@@ -36,7 +37,14 @@ const Main = () => {
       <ApolloProvider client={client}>
         <NavigationContainer>
           <SafeAreaProvider>
-            <App />
+            <headerTitleContext.Provider
+              value={{
+                headerTitle: "Home",
+                setHeaderTitle: () => {},
+              }}
+            >
+              <App />
+            </headerTitleContext.Provider>
           </SafeAreaProvider>
         </NavigationContainer>
       </ApolloProvider>

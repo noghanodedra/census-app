@@ -1,11 +1,14 @@
-import React, { memo, useState } from "react";
+import React, { memo, useContext } from "react";
 import { StyleSheet } from "react-native";
 import { Appbar } from "react-native-paper";
 import { DrawerActions } from "react-navigation-drawer";
 
 import { theme } from "helpers";
+import { HeaderTitleContext } from "contexts";
 
-const CustomAppbar = ({ previous, title, navigation }) => {
+const CustomAppbar = ({ previous, navigation }) => {
+  const { headerTitle } = useContext(HeaderTitleContext);
+  console.log(headerTitle);
   return (
     <Appbar.Header theme={{ colors: { primary: theme.colors.primary } }}>
       {previous ? (
@@ -21,7 +24,7 @@ const CustomAppbar = ({ previous, title, navigation }) => {
           }}
         />
       )}
-      <Appbar.Content title={title} />
+      <Appbar.Content title={headerTitle} />
     </Appbar.Header>
   );
 };
@@ -36,6 +39,8 @@ const styles = StyleSheet.create({
   },
   content: {
     textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 16,
     color: theme.colors.secondary,
   },
 });

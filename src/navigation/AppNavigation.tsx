@@ -6,6 +6,7 @@ import { CustomAppbar, DrawerContent } from "navigation";
 import { Registration } from "features/registration";
 import { DashBoard } from "features/dashboard";
 import { Profile } from "features/profile";
+import ScreenNames from "constants/screen-names";
 
 const DrawerNavigator = createDrawerNavigator(
   {
@@ -22,7 +23,7 @@ const DrawerNavigator = createDrawerNavigator(
   {
     contentComponent: DrawerContent,
     drawerType: "slide",
-    initialRouteName: "DashBoard",
+    initialRouteName: ScreenNames.DASHBOARD,
   }
 );
 

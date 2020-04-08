@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useContext } from "react";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 import { FAB, Paragraph, CenterSpinner } from "components";
@@ -6,6 +6,7 @@ import { View } from "react-native";
 import { SafeAreaView } from "react-navigation";
 
 import ScreenNames from "constants/screen-names";
+import { HeaderTitleContext } from "contexts";
 import styles from "./styles";
 
 const GET_DATA = gql`
@@ -78,6 +79,7 @@ const GET_DATA = gql`
 
 const LandingPage = ({ ...props }) => {
   const { loading, error, data } = useQuery(GET_DATA);
+  const { setHeaderTitle } = useContext(HeaderTitleContext);
 
   if (loading) {
     return <CenterSpinner />;
@@ -96,12 +98,13 @@ const LandingPage = ({ ...props }) => {
           small
           label="Register"
           icon="plus"
-          onPress={() =>
+          onPress={() => {
+            setHeaderTitle(ScreenNames.REGISTRATION);
             props.navigation.navigate(ScreenNames.REGISTRATION, {
               data,
-              title: "reg",
-            })
-          }
+              title: ScreenNames.REGISTRATION,
+            });
+          }}
         />
       </View>
     </SafeAreaView>

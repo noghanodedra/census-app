@@ -10,7 +10,7 @@ const TextInput = ({ errorText, ...props }, ref) => {
     if (errorText && ref && props.scrollViewRef) {
       scrollToComponentInScrollView(props.scrollViewRef, ref);
     }
-  }, [errorText]);
+  });
 
   return (
     <View style={styles.container} ref={ref}>
