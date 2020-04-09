@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Avatar, Title, Caption } from "react-native-paper";
 import Moment from "moment";
@@ -8,12 +8,12 @@ import CenterSpinner from "components/CenterSpinner";
 import { getUser } from "helpers/utils";
 
 const UserInfo = ({ ...props }) => {
-  const [user, setUser] = React.useState(null);
+  const [user, setUser] = useState(null);
   const fetchUser = async () => {
     const user = await getUser();
     setUser(user);
   };
-  React.useEffect(() => {
+  useEffect(() => {
     fetchUser();
   }, []);
 
@@ -41,20 +41,20 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   title: {
     marginTop: 10,
     fontWeight: "bold",
-    color: theme.colors.secondary
+    color: theme.colors.secondary,
   },
   drawerItem: {
-    color: theme.colors.secondary
+    color: theme.colors.secondary,
   },
   caption: {
     fontSize: 14,
-    lineHeight: 14
-  }
+    lineHeight: 14,
+  },
 });
 
 export default memo(UserInfo);

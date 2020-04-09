@@ -31,13 +31,10 @@ const AppNavigation = createStackNavigator({
   DrawerNavigator: {
     screen: DrawerNavigator,
     navigationOptions: ({ navigation }) => {
+
       return {
         header: (props) => (
-          <CustomAppbar
-            previous={null}
-            title={navigation.getParam("title", "Home")}
-            navigation={props.navigation}
-          ></CustomAppbar>
+          <CustomAppbar previous={null} navigation={navigation}></CustomAppbar>
         ),
       };
     },

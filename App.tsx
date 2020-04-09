@@ -9,11 +9,12 @@ import { theme } from "helpers/theme";
 import makeApolloClient from "helpers/apollo";
 import CenterSpinner from "components/CenterSpinner";
 import { getToken } from "helpers/utils";
-import { headerTitleContext } from "helpers/HeaderTitle.context";
-
+import { HeaderTitleContext } from "contexts";
+import { useHeaderTitle } from "hooks";
 console.disableYellowBox = true;
 
 const Main = () => {
+  const headerTitle = useHeaderTitle();
   const [client, setClient] = React.useState(null);
   const fetchSession = async () => {
     // fetch session
@@ -37,14 +38,9 @@ const Main = () => {
       <ApolloProvider client={client}>
         <NavigationContainer>
           <SafeAreaProvider>
-            <headerTitleContext.Provider
-              value={{
-                headerTitle: "Home",
-                setHeaderTitle: () => {},
-              }}
-            >
+            <HeaderTitleContext.Provider value={headerTitle}>
               <App />
-            </headerTitleContext.Provider>
+            </HeaderTitleContext.Provider>
           </SafeAreaProvider>
         </NavigationContainer>
       </ApolloProvider>

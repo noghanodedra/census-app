@@ -5,7 +5,7 @@ import { Background } from "components";
 
 export const DashBoard = ({ navigation }) => {
   return (
-    <Background>
+    <Background alignTop={true}>
       <LandingPage navigation={navigation} />
     </Background>
   );

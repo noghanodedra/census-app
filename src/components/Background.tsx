@@ -4,7 +4,13 @@ import { theme } from "helpers";
 
 const Background = ({ children, ...props }) => (
   <View style={styles.background}>
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
+    <KeyboardAvoidingView
+      style={[
+        styles.container,
+        props.alignTop && { justifyContent: "flex-start" },
+      ]}
+      behavior="padding"
+    >
       {children}
     </KeyboardAvoidingView>
     <View style={{ height: 60 }} />

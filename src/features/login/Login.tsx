@@ -50,7 +50,7 @@ const Login = ({ navigation }) => {
     setLoading(true);
     login({ variables: { email: email.value, password: password.value } })
       .then(({ data }) => {
-        console.log(data);
+        //console.log(data);
         setLoading(false);
         setUser(data.login.profile);
         navigation.navigate(ScreenNames.APP);

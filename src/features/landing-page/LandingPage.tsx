@@ -79,10 +79,10 @@ const GET_DATA = gql`
 
 const LandingPage = ({ ...props }) => {
   const { loading, error, data } = useQuery(GET_DATA);
-  const { setHeaderTitle } = useContext(HeaderTitleContext);
+  const { setCurrentHeaderTitle } = useContext(HeaderTitleContext);
 
   if (loading) {
-    return <CenterSpinner />;
+    return <CenterSpinner overlay="true" />;
   }
   console.log(error);
 
@@ -99,7 +99,7 @@ const LandingPage = ({ ...props }) => {
           label="Register"
           icon="plus"
           onPress={() => {
-            setHeaderTitle(ScreenNames.REGISTRATION);
+            setCurrentHeaderTitle(ScreenNames.REGISTRATION);
             props.navigation.navigate(ScreenNames.REGISTRATION, {
               data,
               title: ScreenNames.REGISTRATION,

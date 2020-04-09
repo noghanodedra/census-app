@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
+import React, { Component } from "react";
+import { View, Text } from "react-native";
 
 class StepIcon extends Component {
   render() {
@@ -14,12 +14,12 @@ class StepIcon extends Component {
           borderRadius: 20,
           backgroundColor: this.props.activeStepIconColor,
           borderColor: this.props.activeStepIconBorderColor,
-          borderWidth: 5
+          borderWidth: 1,
           //bottom: 2
         },
         circleText: {
           alignSelf: "center",
-          top: 20 / 3
+          top: 20 / 3,
         },
         labelText: {
           textAlign: "center",
@@ -28,7 +28,7 @@ class StepIcon extends Component {
           paddingTop: 2,
           fontFamily: this.props.labelFontFamily,
           color: this.props.activeLabelColor,
-          fontWeight: "600"
+          fontWeight: "600",
         },
         leftBar: {
           position: "absolute",
@@ -38,7 +38,7 @@ class StepIcon extends Component {
           borderTopStyle: this.props.borderStyle,
           borderTopWidth: this.props.borderWidth,
           borderTopColor: this.props.completedProgressBarColor,
-          marginRight: 40 / 2 + 2
+          marginRight: 40 / 2 + 2,
         },
         rightBar: {
           position: "absolute",
@@ -48,11 +48,11 @@ class StepIcon extends Component {
           borderTopStyle: this.props.borderStyle,
           borderTopWidth: this.props.borderWidth,
           borderTopColor: this.props.progressBarColor,
-          marginLeft: 40 / 2 + 2
+          marginLeft: 40 / 2 + 2,
         },
         stepNum: {
-          color: this.props.activeStepNumColor
-        }
+          color: this.props.activeStepNumColor,
+        },
       };
     } else if (this.props.isCompletedStep) {
       styles = {
@@ -60,11 +60,11 @@ class StepIcon extends Component {
           width: 36,
           height: 36,
           borderRadius: 18,
-          backgroundColor: this.props.completedStepIconColor
+          backgroundColor: this.props.completedStepIconColor,
         },
         circleText: {
           alignSelf: "center",
-          top: 18 / 2
+          top: 18 / 2,
         },
         labelText: {
           textAlign: "center",
@@ -74,7 +74,7 @@ class StepIcon extends Component {
           fontFamily: this.props.labelFontFamily,
           color: this.props.labelColor,
           marginTop: 4,
-          fontWeight: "600"
+          fontWeight: "600",
         },
         leftBar: {
           position: "absolute",
@@ -84,7 +84,7 @@ class StepIcon extends Component {
           borderTopStyle: this.props.borderStyle,
           borderTopWidth: this.props.borderWidth,
           borderTopColor: this.props.completedProgressBarColor,
-          marginRight: 36 / 2 + 4
+          marginRight: 36 / 2 + 4,
         },
         rightBar: {
           position: "absolute",
@@ -94,16 +94,16 @@ class StepIcon extends Component {
           borderTopStyle: this.props.borderStyle,
           borderTopWidth: this.props.borderWidth,
           borderTopColor: this.props.completedProgressBarColor,
-          marginLeft: 36 / 2 + 4
+          marginLeft: 36 / 2 + 4,
         },
         stepNum: {
-          color: this.props.completedStepNumColor
+          color: this.props.completedStepNumColor,
         },
         completedCheck: {
           color: this.props.completedCheckColor,
           position: "relative",
-          top: 6
-        }
+          top: 6,
+        },
       };
     } else {
       styles = {
@@ -111,11 +111,11 @@ class StepIcon extends Component {
           width: 36,
           height: 36,
           borderRadius: 18,
-          backgroundColor: this.props.disabledStepIconColor
+          backgroundColor: this.props.disabledStepIconColor,
         },
         circleText: {
           alignSelf: "center",
-          top: 18 / 2
+          top: 18 / 2,
         },
         labelText: {
           textAlign: "center",
@@ -125,7 +125,7 @@ class StepIcon extends Component {
           fontFamily: this.props.labelFontFamily,
           color: this.props.labelColor,
           marginTop: 4,
-          fontWeight: "600"
+          fontWeight: "600",
         },
         leftBar: {
           position: "absolute",
@@ -135,7 +135,7 @@ class StepIcon extends Component {
           borderTopStyle: this.props.borderStyle,
           borderTopWidth: this.props.borderWidth,
           borderTopColor: this.props.progressBarColor,
-          marginRight: 36 / 2 + 4
+          marginRight: 36 / 2 + 4,
         },
         rightBar: {
           position: "absolute",
@@ -145,11 +145,11 @@ class StepIcon extends Component {
           borderTopStyle: this.props.borderStyle,
           borderTopWidth: this.props.borderWidth,
           borderTopColor: this.props.progressBarColor,
-          marginLeft: 36 / 2 + 4
+          marginLeft: 36 / 2 + 4,
         },
         stepNum: {
-          color: this.props.disabledStepNumColor
-        }
+          color: this.props.disabledStepNumColor,
+        },
       };
     }
 
@@ -198,7 +198,7 @@ StepIcon.propTypes = {
   completedStepNumColor: PropTypes.string,
   disabledStepNumColor: PropTypes.string,
 
-  completedCheckColor: PropTypes.string
+  completedCheckColor: PropTypes.string,
 };
 
 StepIcon.defaultProps = {
@@ -220,7 +220,7 @@ StepIcon.defaultProps = {
   completedStepNumColor: "black",
   disabledStepNumColor: "white",
 
-  completedCheckColor: "white"
+  completedCheckColor: "white",
 };
 
 export default StepIcon;

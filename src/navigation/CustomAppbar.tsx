@@ -2,13 +2,12 @@ import React, { memo, useContext } from "react";
 import { StyleSheet } from "react-native";
 import { Appbar } from "react-native-paper";
 import { DrawerActions } from "react-navigation-drawer";
-
 import { theme } from "helpers";
 import { HeaderTitleContext } from "contexts";
 
 const CustomAppbar = ({ previous, navigation }) => {
   const { headerTitle } = useContext(HeaderTitleContext);
-  console.log(headerTitle);
+  const { state } = navigation;
   return (
     <Appbar.Header theme={{ colors: { primary: theme.colors.primary } }}>
       {previous ? (
@@ -18,7 +17,7 @@ const CustomAppbar = ({ previous, navigation }) => {
         />
       ) : (
         <Appbar.Action
-          icon="menu"
+          icon={state.isDrawerOpen ? "close" : "menu"}
           onPress={() => {
             navigation.dispatch(DrawerActions.toggleDrawer());
           }}

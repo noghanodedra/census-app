@@ -10,7 +10,7 @@ import ScreenNames from "constants/screen-names";
 import { HeaderTitleContext } from "contexts";
 
 const DrawerContent = ({ ...props }) => {
-  const { setHeaderTitle } = useContext(HeaderTitleContext);
+  const { setCurrentHeaderTitle } = useContext(HeaderTitleContext);
 
   return (
     <DrawerContentScrollView {...props}>
@@ -23,7 +23,7 @@ const DrawerContent = ({ ...props }) => {
             )}
             label="Home"
             onPress={() => {
-              setHeaderTitle("Home");
+              setCurrentHeaderTitle("Home");
               props.navigation.navigate(ScreenNames.DASHBOARD);
             }}
           />
@@ -37,7 +37,7 @@ const DrawerContent = ({ ...props }) => {
             )}
             label="Profile"
             onPress={() => {
-              setHeaderTitle(ScreenNames.PROFILE);
+              setCurrentHeaderTitle(ScreenNames.PROFILE);
               props.navigation.navigate(ScreenNames.PROFILE);
             }}
           />

@@ -9,6 +9,7 @@ import { AddFamily } from "features/registration/add-family";
 import { AddIndividual } from "features/registration/add-individual";
 import { Summary } from "features/registration/summary";
 import ScreenNames from "constants/screen-names";
+import styles from "components/address/styles";
 
 const Registration = ({ ...props }) => {
   const { data } = props.navigation.state.params;
@@ -106,8 +107,8 @@ const Registration = ({ ...props }) => {
   }, []);
 
   return (
-    <Background>
-      <View style={{ flex: 1, width: "100%", padding: 5, marginTop: -20 }}>
+    <Background alignTop={true}>
+      <View style={styles.container}>
         <ProgressSteps {...progressStepsStyle}>
           <ProgressStep
             label="Add Family"

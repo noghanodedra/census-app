@@ -2,12 +2,12 @@ import React from "react";
 
 export interface IHeaderTitleContext {
   headerTitle: string;
-  setHeaderTitle: (headerTitle: string) => void;
+  setCurrentHeaderTitle: (headerTitle: string) => void;
 }
 
 export const HEADER_TITLE_DEFAULT_VALUE = {
   headerTitle: "Home",
-  setHeaderTitle: () => {},
+  setCurrentHeaderTitle: () => {},
 };
 
 const HeaderTitleContext = React.createContext<IHeaderTitleContext>(
