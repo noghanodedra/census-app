@@ -48,7 +48,7 @@ export const emailValidator = (email) => {
 
 export const passwordValidator = (password) => {
   if (!password || password.length <= 0) return "Password cannot be empty.";
-
+  if (password && password.length <= 2) return "Password cannot be too small.";
   return "";
 };
 

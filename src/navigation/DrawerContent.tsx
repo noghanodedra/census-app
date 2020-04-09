@@ -49,17 +49,6 @@ const DrawerContent = ({ ...props }) => {
             label="Preferences"
             onPress={() => {}}
           />
-          <DrawerItem
-            icon={({ color, size }) => (
-              <MaterialCommunityIcons
-                name="bookmark-outline"
-                color={color}
-                size={size}
-              />
-            )}
-            label="Bookmarks"
-            onPress={() => {}}
-          />
         </Drawer.Section>
         <Drawer.Section>
           <LogoutDrawerItem

@@ -8,7 +8,6 @@ import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import {
   Background,
-  CenterSpinner,
   ViewWithTitle,
   TextInput,
   Address,
@@ -36,7 +35,6 @@ const AddFamily = ({ navigation, dropDownData, scrollViewRef }, ref) => {
     value: { name: "", id: "0" },
     error: "",
   });
-  const [isLoading, setLoading] = useState(false);
   const [createFamily] = useMutation(ADD_FAMILY);
 
   let addressCompRef = useRef(null);
@@ -114,8 +112,6 @@ const AddFamily = ({ navigation, dropDownData, scrollViewRef }, ref) => {
             ref={addressCompRef}
           ></Address>
         </ViewWithTitle>
-
-        {isLoading ? <CenterSpinner overlay="true"></CenterSpinner> : null}
       </Background>
     </View>
   );

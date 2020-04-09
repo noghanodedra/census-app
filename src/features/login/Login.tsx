@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { memo, useState, useContext } from "react";
 import { TouchableOpacity, Text, View } from "react-native";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
@@ -7,13 +7,17 @@ import {
   Button,
   BackButton,
   Background,
-  CenterSpinner,
   Header,
   Logo,
   TextInput,
 } from "components";
-
-import { emailValidator, passwordValidator, setUser } from "helpers/utils";
+import { LoadingContext } from "contexts";
+import {
+  emailValidator,
+  passwordValidator,
+  setUser,
+  extractErrorFromExtention,
+} from "helpers/utils";
 import styles from "./styles";
 import ScreenNames from "constants/screen-names";
 
@@ -33,12 +37,11 @@ const LOGIN_USER = gql`
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState({ value: "test@test.com", error: "" });
   const [password, setPassword] = useState({ value: "test", error: "" });
-  const [isLoading, setLoading] = useState(false);
+  const { showLoading, hideLoading } = useContext(LoadingContext);
 
   const [login] = useMutation(LOGIN_USER);
 
-  const _onLoginPressed = (e: any) => {
-    e.preventDefault();
+  const _onLoginPressed = () => {
     const emailError = emailValidator(email.value);
     const passwordError = passwordValidator(password.value);
 
@@ -47,23 +50,16 @@ const Login = ({ navigation }) => {
       setPassword({ ...password, error: passwordError });
       return;
     }
-    setLoading(true);
+    showLoading();
     login({ variables: { email: email.value, password: password.value } })
       .then(({ data }) => {
         //console.log(data);
-        setLoading(false);
+        hideLoading();
         setUser(data.login.profile);
         navigation.navigate(ScreenNames.APP);
       })
       .catch((e) => {
-        // If the error message contains email or password we'll assume that's the error.
-        if (/email/i.test(e.message)) {
-          //this.setState({ emailError: true });
-        }
-        if (/password/i.test(e.message)) {
-          //this.setState({ passwordError: true });
-        }
-        setLoading(false);
+        //hideLoading();
       });
   };
 
@@ -116,7 +112,6 @@ const Login = ({ navigation }) => {
           <Text style={styles.link}>Sign up</Text>
         </TouchableOpacity>
       </View>*/}
-      {isLoading ? <CenterSpinner overlay="true"></CenterSpinner> : null}
     </Background>
   );
 };

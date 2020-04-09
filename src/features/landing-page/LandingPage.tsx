@@ -1,12 +1,11 @@
 import React, { memo, useContext } from "react";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
-import { FAB, Paragraph, CenterSpinner } from "components";
+import { FAB, Paragraph } from "components";
 import { View } from "react-native";
-import { SafeAreaView } from "react-navigation";
 
 import ScreenNames from "constants/screen-names";
-import { HeaderTitleContext } from "contexts";
+import { HeaderTitleContext, LoadingContext } from "contexts";
 import styles from "./styles";
 
 const GET_DATA = gql`
@@ -80,18 +79,19 @@ const GET_DATA = gql`
 const LandingPage = ({ ...props }) => {
   const { loading, error, data } = useQuery(GET_DATA);
   const { setCurrentHeaderTitle } = useContext(HeaderTitleContext);
+  const { showLoading, hideLoading } = useContext(LoadingContext);
 
   if (loading) {
-    return <CenterSpinner overlay="true" />;
+    showLoading();
+    return null;
+  } else {
+    hideLoading();
   }
-  console.log(error);
-
   return (
-    <SafeAreaView>
-      <Paragraph>
-        Your amazing app starts here. Open you favourite code editor and start
-        editing this project.
-      </Paragraph>
+    <>
+      <View>
+        <Paragraph>this</Paragraph>
+      </View>
       <View style={styles.fixedView}>
         <FAB
           style={styles.fab}
@@ -102,12 +102,11 @@ const LandingPage = ({ ...props }) => {
             setCurrentHeaderTitle(ScreenNames.REGISTRATION);
             props.navigation.navigate(ScreenNames.REGISTRATION, {
               data,
-              title: ScreenNames.REGISTRATION,
             });
           }}
         />
       </View>
-    </SafeAreaView>
+    </>
   );
 };
 

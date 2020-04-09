@@ -4,7 +4,6 @@ import { Avatar, Title, Caption } from "react-native-paper";
 import Moment from "moment";
 
 import { theme } from "helpers";
-import CenterSpinner from "components/CenterSpinner";
 import { getUser } from "helpers/utils";
 
 const UserInfo = ({ ...props }) => {
@@ -18,7 +17,7 @@ const UserInfo = ({ ...props }) => {
   }, []);
 
   if (!user) {
-    return <CenterSpinner />;
+    return null;
   }
   return (
     <View style={styles.userInfoSection}>

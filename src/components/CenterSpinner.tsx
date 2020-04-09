@@ -8,7 +8,7 @@ const CenterSpinner = ({ ...props }) => (
     style={[
       styles.container,
       styles.horizontal,
-      props.overlay ? styles.overlay : null
+      props.overlay ? styles.overlay : null,
     ]}
   >
     <ActivityIndicator size="large" color={theme.colors.primary} {...props} />
@@ -20,12 +20,12 @@ export default memo(CenterSpinner);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center"
+    justifyContent: "center",
   },
   horizontal: {
     flexDirection: "row",
     justifyContent: "space-around",
-    padding: 10
+    padding: 10,
   },
   overlay: {
     position: "absolute",
@@ -34,6 +34,6 @@ const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
     alignItems: "center",
-    justifyContent: "center"
-  }
+    justifyContent: "center",
+  },
 });

@@ -1,8 +1,9 @@
-import React, { memo, useState, useRef, useEffect } from "react";
+import React, { memo, useState, useRef, useEffect, useContext } from "react";
 import { View } from "react-native";
 
+import { LoadingContext } from "contexts";
 import { ProgressSteps, ProgressStep } from "components/progress-steps";
-import { Background, CenterSpinner } from "components";
+import { Background } from "components";
 import { showSuccesToast, showErrorToast } from "components/UIUtilities";
 import { theme } from "helpers";
 import { AddFamily } from "features/registration/add-family";
@@ -14,6 +15,7 @@ import styles from "components/address/styles";
 const Registration = ({ ...props }) => {
   const { data } = props.navigation.state.params;
   const [family, setFamily] = useState({});
+  const { showLoading, hideLoading } = useContext(LoadingContext);
 
   const [state, setState] = useState({
     isValid: false,
@@ -34,15 +36,18 @@ const Registration = ({ ...props }) => {
         reject(false);
         return false;
       }
+      showLoading();
       addFamilyCompRef.current
         ._onAddFamily()
         .then(({ data }) => {
           setFamily(data.createFamily);
+          hideLoading();
           resolve(true);
           showSuccesToast("Family added.");
         })
         .catch((e) => {
           console.error(e);
+          hideLoading();
           setState({ errors: true, isValid: true });
           reject(false);
         });
@@ -58,14 +63,17 @@ const Registration = ({ ...props }) => {
         reject(false);
         return false;
       }
+      showLoading();
       addIndividualCompRef.current
         ._onAddIndividual()
         .then(({ data }) => {
+          hideLoading();
           showSuccesToast("Individual added.");
           resolve(true);
         })
         .catch((e) => {
           console.error(e);
+          hideLoading();
           setState({ errors: true, isValid: true });
           reject(false);
         });

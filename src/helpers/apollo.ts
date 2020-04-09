@@ -1,5 +1,5 @@
 import ApolloClient, { InMemoryCache } from "apollo-boost";
-
+import { showErrorToast } from "components/UIUtilities";
 const makeApolloClient = () => {
   const client = new ApolloClient({
     uri: `http://192.168.43.7:4000/graphql`,
@@ -13,12 +13,18 @@ const makeApolloClient = () => {
       });
     },
     onError: ({ graphQLErrors, networkError, operation, forward }) => {
-      console.log(graphQLErrors, networkError);
-      if (networkError) console.log(`[Network error]: ${networkError}`);
+      //console.log(graphQLErrors, networkError);
+      if (networkError) {
+        console.log(`[Network error]: ${networkError}`);
+        showErrorToast("Network error.");
+      }
       if (graphQLErrors) {
         for (let err of graphQLErrors) {
           // handle errors differently based on its error code
+          console.log(err.extensions.code);
           switch (err.extensions.code) {
+            case "BAD_USER_INPUT":
+              showErrorToast(err.extensions.inputError.message);
             case "UNAUTHENTICATED":
               // old token has expired throwing AuthenticationError,
               // one way to handle is to obtain a new token and

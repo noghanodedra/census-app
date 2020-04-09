@@ -1,17 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
-import {
-  Background,
-  CenterSpinner,
-  ViewWithTitle,
-  DataTable,
-  Modal,
-} from "components";
+import { View } from "react-native";
+
+import { Background, ViewWithTitle, DataTable, Modal } from "components";
 import FamilyInfo from "./components/FamilyInfo";
 import IndividualInfo from "./components/IndividualInfo";
+import { LoadingContext } from "contexts";
+
 import styles from "./styles";
-import { View } from "react-native";
 
 const GET_FAMILY = gql`
   query getFamily($id: String!) {
@@ -62,6 +59,7 @@ const GET_FAMILY = gql`
 const Summary = ({ navigation, family }) => {
   const [showModal, setShowModal] = useState(false);
   const [individualData, setIndividualData] = useState(null);
+  const { showLoading, hideLoading } = useContext(LoadingContext);
 
   const columns = [
     { numeric: false, name: "Name", width: 80, align: "left" },
@@ -86,7 +84,13 @@ const Summary = ({ navigation, family }) => {
   const FamilyComponent = graphql(GET_FAMILY, {
     options: { variables: { id: family.id }, fetchPolicy: "network-only" },
   })((props) => {
-    const { error, family } = props.data;
+    const { loading, error, family } = props.data;
+    if (loading) {
+      showLoading();
+      return;
+    } else {
+      hideLoading();
+    }
     if (error) {
       console.error(error);
     }
@@ -120,7 +124,6 @@ const Summary = ({ navigation, family }) => {
         </Background>
       );
     }
-    return <CenterSpinner overlay="true"></CenterSpinner>;
   });
 
   return (

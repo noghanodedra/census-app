@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Provider } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
 import { ApolloProvider } from "react-apollo";
@@ -7,13 +7,18 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import App from "./src";
 import { theme } from "helpers/theme";
 import makeApolloClient from "helpers/apollo";
-import CenterSpinner from "components/CenterSpinner";
+import { Spinner, LoadingProvider } from "components";
 import { getToken } from "helpers/utils";
-import { HeaderTitleContext } from "contexts";
+import { HeaderTitleContext, LoadingContext } from "contexts";
 import { useHeaderTitle } from "hooks";
 console.disableYellowBox = true;
 
+//console.ignoredYellowBox = ["Require cycle: node_modules/react-native-paper"];
+console.ignoredYellowBox = ["Require cycle"];
+
 const Main = () => {
+  const { loadingCount } = useContext(LoadingContext);
+
   const headerTitle = useHeaderTitle();
   const [client, setClient] = React.useState(null);
   const fetchSession = async () => {
@@ -31,7 +36,7 @@ const Main = () => {
   }, []);
 
   if (!client) {
-    return <CenterSpinner />;
+    return null;
   }
   return (
     <Provider theme={theme}>
@@ -39,7 +44,10 @@ const Main = () => {
         <NavigationContainer>
           <SafeAreaProvider>
             <HeaderTitleContext.Provider value={headerTitle}>
-              <App />
+              <LoadingProvider>
+                <Spinner />
+                <App />
+              </LoadingProvider>
             </HeaderTitleContext.Provider>
           </SafeAreaProvider>
         </NavigationContainer>
