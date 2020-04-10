@@ -35,6 +35,7 @@ class ProgressStep extends Component {
     };
 
     const btnTextStyle = {
+      textAlign: "center",
       color: "#007AFF",
       fontSize: 18,
       ...this.props.nextBtnTextStyle,
@@ -75,6 +76,7 @@ class ProgressStep extends Component {
     };
 
     const btnTextStyle = {
+      textAlign: "center",
       color: "#007AFF",
       fontSize: 18,
       ...this.props.previousBtnTextStyle,
@@ -104,7 +106,7 @@ class ProgressStep extends Component {
     const scrollViewProps = this.props.scrollViewProps || {};
 
     return (
-      <View>
+      <View style={{flex:1}}>
         <ScrollView {...scrollViewProps}>{this.props.children}</ScrollView>
 
         <ProgressButtons

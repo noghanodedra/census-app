@@ -9,7 +9,7 @@ import { theme } from "helpers/theme";
 import makeApolloClient from "helpers/apollo";
 import { Spinner, LoadingProvider } from "components";
 import { getToken } from "helpers/utils";
-import { HeaderTitleContext, LoadingContext } from "contexts";
+import { HeaderTitleContext } from "contexts";
 import { useHeaderTitle } from "hooks";
 console.disableYellowBox = true;
 
@@ -17,8 +17,6 @@ console.disableYellowBox = true;
 console.ignoredYellowBox = ["Require cycle"];
 
 const Main = () => {
-  const { loadingCount } = useContext(LoadingContext);
-
   const headerTitle = useHeaderTitle();
   const [client, setClient] = React.useState(null);
   const fetchSession = async () => {
@@ -45,8 +43,8 @@ const Main = () => {
           <SafeAreaProvider>
             <HeaderTitleContext.Provider value={headerTitle}>
               <LoadingProvider>
-                <Spinner />
                 <App />
+                <Spinner />
               </LoadingProvider>
             </HeaderTitleContext.Provider>
           </SafeAreaProvider>

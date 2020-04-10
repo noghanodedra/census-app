@@ -5,11 +5,10 @@ import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 
 import { Background, ViewWithTitle, TextInput, Button } from "components";
-import { showErrorToast, showSuccesToast } from "components/UIUtilities";
+import {  showSuccesToast } from "components/UIUtilities";
 import {
   getUser,
   passwordValidator,
-  extractGQLErrorMessage,
 } from "helpers/utils";
 import { LoadingContext } from "contexts";
 
@@ -43,6 +42,7 @@ const Profile = ({ ...props }) => {
   const fetchUser = async () => {
     const user = await getUser();
     setUser(user);
+    console.log(user);
   };
 
   const _onChangePressed = () => {
@@ -74,7 +74,6 @@ const Profile = ({ ...props }) => {
       })
       .catch((e) => {
         console.log(e);
-        showErrorToast(extractGQLErrorMessage(e));
         hideLoading();
       });
   };
@@ -86,7 +85,7 @@ const Profile = ({ ...props }) => {
   if (!user) {
     return null;
   }
-  console.log(user);
+
   return (
     <Background alignTop={true}>
       <ViewWithTitle title="Details">

@@ -1,3 +1,4 @@
+import React from "react";
 import { createSwitchNavigator, createAppContainer } from "react-navigation";
 
 import { AuthNavigation, AppNavigation } from "navigation";
@@ -14,4 +15,8 @@ const SwitchNavigator = createSwitchNavigator(
 
 const AppContainer = createAppContainer(SwitchNavigator);
 
-export default AppContainer;
+export default class App extends React.Component {
+  render() {
+    return <AppContainer />;
+  }
+}

@@ -2,7 +2,7 @@ import React from "react";
 import Toast from "react-native-tiny-toast";
 import { theme } from "helpers";
 
-export const showSuccesToast = (message: string) => {
+export const showSuccesToast = async (message: string) => {
   Toast.showSuccess(message, {
     position: Toast.position.CENTER,
     containerStyle: { backgroundColor: theme.colors.primary },
@@ -11,7 +11,10 @@ export const showSuccesToast = (message: string) => {
   });
 };
 
-export const showErrorToast = (message: string, duration: number = 3000) => {
+export const showErrorToast = async (
+  message: string,
+  duration: number = 3000
+) => {
   Toast.show(message, {
     position: Toast.position.CENTER,
     containerStyle: {

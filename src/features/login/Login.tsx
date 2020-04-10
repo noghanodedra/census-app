@@ -12,12 +12,7 @@ import {
   TextInput,
 } from "components";
 import { LoadingContext } from "contexts";
-import {
-  emailValidator,
-  passwordValidator,
-  setUser,
-  extractErrorFromExtention,
-} from "helpers/utils";
+import { emailValidator, passwordValidator, setUser } from "helpers/utils";
 import styles from "./styles";
 import ScreenNames from "constants/screen-names";
 
@@ -39,7 +34,10 @@ const Login = ({ navigation }) => {
   const [password, setPassword] = useState({ value: "test", error: "" });
   const { showLoading, hideLoading } = useContext(LoadingContext);
 
-  const [login] = useMutation(LOGIN_USER);
+  const [
+    login,
+    { loading: mutationLoading, error: mutationError },
+  ] = useMutation(LOGIN_USER);
 
   const _onLoginPressed = () => {
     const emailError = emailValidator(email.value);
@@ -51,15 +49,21 @@ const Login = ({ navigation }) => {
       return;
     }
     showLoading();
-    login({ variables: { email: email.value, password: password.value } })
+    console.log(new Date());
+    login({
+      variables: { email: email.value, password: password.value },
+      fetchPolicy: "no-cache",
+    })
       .then(({ data }) => {
+        console.log(new Date());
         //console.log(data);
         hideLoading();
         setUser(data.login.profile);
         navigation.navigate(ScreenNames.APP);
       })
       .catch((e) => {
-        //hideLoading();
+        console.log(e);
+        hideLoading();
       });
   };
 

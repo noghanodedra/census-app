@@ -1,4 +1,4 @@
-import React, { memo, useContext } from "react";
+import React, { memo, useContext, useEffect } from "react";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 import { FAB, Paragraph } from "components";
@@ -77,15 +77,20 @@ const GET_DATA = gql`
 `;
 
 const LandingPage = ({ ...props }) => {
-  const { loading, error, data } = useQuery(GET_DATA);
+  const { loading, error, data, called } = useQuery(GET_DATA);
   const { setCurrentHeaderTitle } = useContext(HeaderTitleContext);
   const { showLoading, hideLoading } = useContext(LoadingContext);
 
+  useEffect(() => {
+    if (loading) {
+      showLoading();
+    } else {
+      hideLoading();
+    }
+  }, [loading]);
+
   if (loading) {
-    showLoading();
     return null;
-  } else {
-    hideLoading();
   }
   return (
     <>
