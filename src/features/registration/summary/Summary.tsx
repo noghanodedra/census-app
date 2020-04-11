@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
 import { View } from "react-native";
@@ -85,11 +85,16 @@ const Summary = ({ navigation, family }) => {
     options: { variables: { id: family.id }, fetchPolicy: "network-only" }
   })(props => {
     const { loading, error, family } = props.data;
+    useEffect(() => {
+      if (loading) {
+        showLoading();
+      } else {
+        hideLoading();
+      }
+    }, [loading]);
+
     if (loading) {
-      showLoading();
       return null;
-    } else {
-      hideLoading();
     }
     if (error) {
       console.error(error);

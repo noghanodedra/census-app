@@ -3,6 +3,7 @@ import { View, StyleSheet } from "react-native";
 import { DrawerItem, DrawerContentScrollView } from "@react-navigation/drawer";
 import { Drawer } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { EventRegister } from "react-native-event-listeners";
 
 import { theme } from "helpers";
 import { UserInfo, LogoutDrawerItem } from "components";
@@ -12,6 +13,10 @@ import { HeaderTitleContext } from "contexts";
 const DrawerContent = ({ ...props }) => {
   const { setCurrentHeaderTitle } = useContext(HeaderTitleContext);
 
+  EventRegister.addEventListener("myCustomEvent", data => {
+    props.navigation.navigate("Auth");
+  });
+  
   return (
     <DrawerContentScrollView {...props}>
       <UserInfo />
@@ -67,28 +72,28 @@ export default DrawerContent;
 
 const styles = StyleSheet.create({
   drawerContent: {
-    flex: 1,
+    flex: 1
   },
   userInfoSection: {
     paddingLeft: 10,
     flex: 1,
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   title: {
     marginTop: 10,
     fontWeight: "bold",
-    color: theme.colors.secondary,
+    color: theme.colors.secondary
   },
   drawerItem: {
-    color: theme.colors.secondary,
+    color: theme.colors.secondary
   },
   caption: {
     fontSize: 14,
-    lineHeight: 14,
+    lineHeight: 14
   },
   drawerSection: {
-    marginTop: 10,
-  },
+    marginTop: 10
+  }
 });

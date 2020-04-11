@@ -1,5 +1,6 @@
 import ApolloClient, { InMemoryCache } from "apollo-boost";
 import { showErrorToast } from "components/UIUtilities";
+import { EventRegister } from "react-native-event-listeners";
 
 //https://www.richardkotze.com/coding/json-web-tokens-using-apollo-graphql
 
@@ -31,9 +32,16 @@ const makeApolloClient = () => {
               break;
             case "FORBIDDEN":
               showErrorToast("Please login and try again.");
+              setTimeout(() => {
+                EventRegister.emit("myCustomEvent", "it works!!!");
+              }, 3100);
+
               break;
             case "UNAUTHENTICATED":
               showErrorToast("Please login and try again.");
+              setTimeout(() => {
+                EventRegister.emit("myCustomEvent", "it works!!!");
+              }, 3100);
               // old token has expired throwing AuthenticationError,
               // one way to handle is to obtain a new token and
               // add it to the operation context
