@@ -8,16 +8,16 @@ const makeApolloClient = () => {
     uri: `http://192.168.43.7:4000/graphql`,
     cache: new InMemoryCache(),
     credentials: "include",
-    request: async (operation) => {
+    request: async operation => {
       operation.setContext({
         fetchOptions: {
-          credentials: "include",
-        },
+          credentials: "include"
+        }
       });
     },
     onError: ({ graphQLErrors, networkError, operation, forward }) => {
       console.log(graphQLErrors, networkError);
-      if (networkError) {
+      if (networkError && !graphQLErrors) {
         console.log(`[Network error]: ${networkError}`);
         showErrorToast("Network error.");
       }
@@ -29,21 +29,26 @@ const makeApolloClient = () => {
             case "BAD_USER_INPUT":
               showErrorToast(err.extensions.inputError.message);
               break;
+            case "FORBIDDEN":
+              showErrorToast("Please login and try again.");
+              break;
             case "UNAUTHENTICATED":
+              showErrorToast("Please login and try again.");
               // old token has expired throwing AuthenticationError,
               // one way to handle is to obtain a new token and
               // add it to the operation context
-              const headers = operation.getContext().headers;
-              operation.setContext({
-                headers: {
-                  ...headers,
-                  //authorization: getNewToken(),
-                },
-              });
+
+              //const headers = operation.getContext().headers;
+              //operation.setContext({
+              //  headers: {
+              //    ...headers,
+              ////authorization: getNewToken(),
+              //  },
+              //});
               // Now, pass the modified operation to the next link
               // in the chain. This effectively intercepts the old
               // failed request, and retries it with a new token
-              return forward(operation);
+              // return forward(operation);
               break;
 
             // handle other errors
@@ -53,7 +58,7 @@ const makeApolloClient = () => {
           }
         }
       }
-    },
+    }
   });
   return client;
 };

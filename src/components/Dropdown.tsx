@@ -68,9 +68,10 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.surface,
   },
   pickerStyle: {
-    borderBottomColor: "transparent",
-    borderWidth: 0,
+    borderWidth: 1,
+    borderRadius:4,
     backgroundColor: theme.colors.surface,
+    borderColor: theme.colors.secondary,
   },
   error: {
     fontSize: 14,

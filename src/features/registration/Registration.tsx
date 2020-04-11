@@ -19,7 +19,7 @@ const Registration = ({ ...props }) => {
 
   const [state, setState] = useState({
     isValid: false,
-    errors: false,
+    errors: false
   });
 
   let addFamilyCompRef = useRef(null);
@@ -45,8 +45,8 @@ const Registration = ({ ...props }) => {
           resolve(true);
           showSuccesToast("Family added.");
         })
-        .catch((e) => {
-          console.error(e);
+        .catch(e => {
+          console.log(e);
           hideLoading();
           setState({ errors: true, isValid: true });
           reject(false);
@@ -71,8 +71,8 @@ const Registration = ({ ...props }) => {
           showSuccesToast("Individual added.");
           resolve(true);
         })
-        .catch((e) => {
-          console.error(e);
+        .catch(e => {
+          console.log(e);
           hideLoading();
           setState({ errors: true, isValid: true });
           reject(false);
@@ -92,25 +92,25 @@ const Registration = ({ ...props }) => {
     activeStepIconColor: theme.colors.primary,
     completedStepIconColor: theme.colors.primary,
     completedProgressBarColor: theme.colors.primary,
-    completedCheckColor: theme.colors.surface,
+    completedCheckColor: theme.colors.surface
   };
   const buttonTextStyle = {
     color: theme.colors.surface,
-    fontWeight: "600",
+    fontWeight: "600"
   };
   const buttonStyle = {
     backgroundColor: theme.colors.primary,
-    borderRadius: 5,
+    borderRadius: 5
   };
   const addIndivButtonStyle = {
     backgroundColor: theme.colors.primary,
     borderRadius: 5,
-    marginRight: 5,
+    marginRight: 5
   };
 
   useEffect(() => {
     props.navigation.setParams({
-      title: ScreenNames.REGISTRATION,
+      title: ScreenNames.REGISTRATION
     });
   }, []);
 
@@ -145,7 +145,7 @@ const Registration = ({ ...props }) => {
             errors={state.errors}
             scrollViewProps={{
               ref: individualScrollViewRef,
-              scrollToTop: true,
+              scrollToTop: true
             }}
           >
             <AddIndividual

@@ -2,14 +2,13 @@ import React, { memo, useState, useContext } from "react";
 import { TouchableOpacity, Text, View } from "react-native";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
-
 import {
   Button,
   BackButton,
   Background,
   Header,
   Logo,
-  TextInput,
+  TextInput
 } from "components";
 import { LoadingContext } from "contexts";
 import { emailValidator, passwordValidator, setUser } from "helpers/utils";
@@ -30,29 +29,46 @@ const LOGIN_USER = gql`
 `;
 
 const Login = ({ navigation }) => {
-  const [email, setEmail] = useState({ value: "test@test.com", error: "" });
-  const [password, setPassword] = useState({ value: "test", error: "" });
+  const [email, setEmail] = useState({
+    value: "test@test.com",
+    error: ""
+  });
+  const [password, setPassword] = useState({
+    value: "test",
+    error: ""
+  });
   const { showLoading, hideLoading } = useContext(LoadingContext);
 
   const [
     login,
-    { loading: mutationLoading, error: mutationError },
+    { loading: mutationLoading, error: mutationError }
   ] = useMutation(LOGIN_USER);
+
+
 
   const _onLoginPressed = () => {
     const emailError = emailValidator(email.value);
     const passwordError = passwordValidator(password.value);
 
     if (emailError || passwordError) {
-      setEmail({ ...email, error: emailError });
-      setPassword({ ...password, error: passwordError });
+      setEmail({
+        ...email,
+        error: emailError
+      });
+      setPassword({
+        ...password,
+        error: passwordError
+      });
       return;
     }
     showLoading();
     console.log(new Date());
     login({
-      variables: { email: email.value, password: password.value },
-      fetchPolicy: "no-cache",
+      variables: {
+        email: email.value,
+        password: password.value
+      },
+      fetchPolicy: "no-cache"
     })
       .then(({ data }) => {
         console.log(new Date());
@@ -61,7 +77,7 @@ const Login = ({ navigation }) => {
         setUser(data.login.profile);
         navigation.navigate(ScreenNames.APP);
       })
-      .catch((e) => {
+      .catch(e => {
         console.log(e);
         hideLoading();
       });
@@ -79,7 +95,7 @@ const Login = ({ navigation }) => {
         label="Email"
         returnKeyType="next"
         value={email.value}
-        onChangeText={(text) => setEmail({ value: text, error: "" })}
+        onChangeText={text => setEmail({ value: text, error: "" })}
         error={!!email.error}
         errorText={email.error}
         autoCapitalize="none"
@@ -91,7 +107,12 @@ const Login = ({ navigation }) => {
         label="Password"
         returnKeyType="done"
         value={password.value}
-        onChangeText={(text) => setPassword({ value: text, error: "" })}
+        onChangeText={text =>
+          setPassword({
+            value: text,
+            error: ""
+          })
+        }
         error={!!password.error}
         errorText={password.error}
         secureTextEntry
