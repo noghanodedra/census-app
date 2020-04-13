@@ -17,17 +17,17 @@ const Dropdown = ({ ...props }, ref) => {
       <MaterialDropdown
         style={[styles.dropdown, props.style]}
         {...props}
-        valueExtractor={(item) => item}
+        valueExtractor={item => item}
         labelExtractor={({ name }) => name}
         inputContainerStyle={[
           props.inputContainerStyle,
-          styles.inputContainerStyle,
+          styles.inputContainerStyle
         ]}
         itemTextStyle={[props.itemTextStyle, styles.itemTextStyle]}
         containerStyle={[
           props.containerStyle,
           styles.containerStyle,
-          !!props.errorText && { borderColor: "rgb(241, 58, 89)" },
+          !!props.errorText && { borderColor: "rgb(241, 58, 89)" }
         ]}
         dropdownOffset={{ top: 16, left: 5 }}
         dropdownPosition={0}
@@ -46,39 +46,39 @@ const Dropdown = ({ ...props }, ref) => {
 const styles = StyleSheet.create({
   container: {
     marginBottom: 10,
-    marginTop: 12,
+    marginTop: 12
   },
   dropdown: {
     paddingHorizontal: 4,
     paddingTop: 4,
-    fontSize: 14,
+    fontSize: 14
   },
   inputContainerStyle: {
-    borderBottomColor: "transparent",
+    borderBottomColor: "transparent"
   },
   containerStyle: {
     borderRadius: 4,
     borderWidth: 1,
     borderColor: "rgba(0, 0, 0, 0.54)",
     //borderColor: "rgb(241, 58, 89)", //red
-    padding: 5,
+    padding: 5
   },
   itemTextStyle: {
     color: theme.colors.placeholder,
-    backgroundColor: theme.colors.surface,
+    backgroundColor: theme.colors.surface
   },
   pickerStyle: {
     borderWidth: 1,
-    borderRadius:4,
+    borderRadius: 4,
     backgroundColor: theme.colors.surface,
-    borderColor: theme.colors.secondary,
+    borderColor: "grey"
   },
   error: {
     fontSize: 14,
     color: theme.colors.error,
     paddingHorizontal: 4,
-    paddingTop: 4,
-  },
+    paddingTop: 4
+  }
 });
 
 export default forwardRef(Dropdown);

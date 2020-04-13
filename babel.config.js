@@ -1,7 +1,7 @@
 module.exports = function(api) {
   api.cache(true);
   return {
-    presets: ["babel-preset-expo"],
+    presets: ["babel-preset-expo", "module:react-native-dotenv"],
     plugins: [
       [
         "module-resolver",
@@ -14,15 +14,15 @@ module.exports = function(api) {
             navigation: "./src/navigation",
             styles: "./src/styles",
             contexts: "./src/contexts/",
-            hooks: "./src/hooks/",
-          },
-        },
-      ],
+            hooks: "./src/hooks/"
+          }
+        }
+      ]
     ],
     env: {
       production: {
-        plugins: ["react-native-paper/babel"],
-      },
-    },
+        plugins: ["react-native-paper/babel"]
+      }
+    }
   };
 };

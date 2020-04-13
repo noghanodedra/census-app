@@ -1,12 +1,15 @@
 import ApolloClient, { InMemoryCache } from "apollo-boost";
+
+//ts-ignore
+import { GRAPHQL_ENDPOINT } from "react-native-dotenv";
 import { showErrorToast } from "components/UIUtilities";
 import { EventRegister } from "react-native-event-listeners";
-
-//https://www.richardkotze.com/coding/json-web-tokens-using-apollo-graphql
+import EventNames from "constants/event-names";
 
 const makeApolloClient = () => {
+  console.log(GRAPHQL_ENDPOINT);
   const client = new ApolloClient({
-    uri: `http://192.168.43.7:4000/graphql`,
+    uri: GRAPHQL_ENDPOINT,
     cache: new InMemoryCache(),
     credentials: "include",
     request: async operation => {
@@ -31,17 +34,10 @@ const makeApolloClient = () => {
               showErrorToast(err.extensions.inputError.message);
               break;
             case "FORBIDDEN":
-              showErrorToast("Please login and try again.");
-              setTimeout(() => {
-                EventRegister.emit("myCustomEvent", "it works!!!");
-              }, 3100);
-
+              EventRegister.emit(EventNames.UNAUTHORISED_ACCESS, {});
               break;
             case "UNAUTHENTICATED":
-              showErrorToast("Please login and try again.");
-              setTimeout(() => {
-                EventRegister.emit("myCustomEvent", "it works!!!");
-              }, 3100);
+              EventRegister.emit(EventNames.UNAUTHORISED_ACCESS, {});
               // old token has expired throwing AuthenticationError,
               // one way to handle is to obtain a new token and
               // add it to the operation context
@@ -58,11 +54,6 @@ const makeApolloClient = () => {
               // failed request, and retries it with a new token
               // return forward(operation);
               break;
-
-            // handle other errors
-            case "ANOTHER_ERROR_CODE":
-              break;
-            // ...
           }
         }
       }

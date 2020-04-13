@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { DrawerItem, DrawerContentScrollView } from "@react-navigation/drawer";
 import { Drawer } from "react-native-paper";
@@ -6,20 +6,32 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { EventRegister } from "react-native-event-listeners";
 
 import { theme } from "helpers";
-import { UserInfo, LogoutDrawerItem } from "components";
+import { UserInfo, LogoutDrawerItem, AuthErrorModal } from "components";
 import ScreenNames from "constants/screen-names";
+import EventNames from "constants/event-names";
 import { HeaderTitleContext } from "contexts";
 
 const DrawerContent = ({ ...props }) => {
   const { setCurrentHeaderTitle } = useContext(HeaderTitleContext);
+  const [showModal, setShowModal] = useState(false);
 
-  EventRegister.addEventListener("myCustomEvent", data => {
-    props.navigation.navigate("Auth");
+  EventRegister.addEventListener(EventNames.UNAUTHORISED_ACCESS, data => {
+    setShowModal(true);
   });
-  
+
+  const toggleModal = () => {
+    setShowModal(false);
+    props.navigation.navigate(ScreenNames.AUTH);
+  };
+
   return (
     <DrawerContentScrollView {...props}>
       <UserInfo />
+      <AuthErrorModal
+        isModalVisible={showModal}
+        toggleModal={toggleModal}
+        message="Session expired. Please login again."
+      ></AuthErrorModal>
       <View style={styles.drawerContent}>
         <Drawer.Section>
           <DrawerItem

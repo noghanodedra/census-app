@@ -33,7 +33,7 @@ const SignUp = ({ navigation }) => {
       return;
     }
 
-    navigation.navigate(ScreenNames.DASHBOARD);
+    navigation.navigate(ScreenNames.LOGIN);
   };
 
   return (

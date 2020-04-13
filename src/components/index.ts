@@ -1,4 +1,5 @@
 export { default as Address } from "./address/Address";
+export { default as AuthErrorModal } from "./AuthErrorModal";
 export { default as BackButton } from "./BackButton";
 export { default as Background } from "./Background";
 export { default as Button } from "./Button";

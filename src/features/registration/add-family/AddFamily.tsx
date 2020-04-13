@@ -2,7 +2,8 @@ import React, {
   useState,
   useRef,
   forwardRef,
-  useImperativeHandle,
+  useEffect,
+  useImperativeHandle
 } from "react";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
@@ -11,7 +12,7 @@ import {
   ViewWithTitle,
   TextInput,
   Address,
-  Dropdown,
+  Dropdown
 } from "components";
 
 import styles from "./styles";
@@ -29,11 +30,11 @@ const ADD_FAMILY = gql`
 const AddFamily = ({ navigation, dropDownData, scrollViewRef }, ref) => {
   const [headName, setHeadName] = useState({
     value: "test",
-    error: "",
+    error: ""
   });
   const [census, setCensus] = useState({
     value: { name: "", id: "0" },
-    error: "",
+    error: ""
   });
   const [createFamily] = useMutation(ADD_FAMILY);
 
@@ -46,7 +47,7 @@ const AddFamily = ({ navigation, dropDownData, scrollViewRef }, ref) => {
     state: "",
     district: "",
     townCity: "",
-    postcode: "",
+    postcode: ""
   };
 
   const _validateFields = () => {
@@ -65,15 +66,20 @@ const AddFamily = ({ navigation, dropDownData, scrollViewRef }, ref) => {
     const family = {
       headName: headName.value,
       censusId: Number.parseInt(census.value.id, 10),
-      address: address,
+      address: address
     };
     return createFamily({ variables: { family } });
   };
 
   useImperativeHandle(ref, () => ({
     _onAddFamily,
-    _validateFields,
+    _validateFields
   }));
+
+  useEffect(() => {
+    console.log("effect");
+    scrollViewRef.current.scrollTo({ x: 0, y: 0, animated: true });
+  }, []);
 
   return (
     <View ref={ref} style={styles.container}>
@@ -83,7 +89,7 @@ const AddFamily = ({ navigation, dropDownData, scrollViewRef }, ref) => {
             label="Head Name"
             returnKeyType="next"
             value={headName.value}
-            onChangeText={(text) => setHeadName({ value: text, error: "" })}
+            onChangeText={text => setHeadName({ value: text, error: "" })}
             error={!!headName.error}
             errorText={headName.error}
             autoCapitalize="none"
@@ -94,7 +100,7 @@ const AddFamily = ({ navigation, dropDownData, scrollViewRef }, ref) => {
             label="Select census"
             data={dropDownData.censusList}
             dropdownPosition={2}
-            onChangeText={(value) => {
+            onChangeText={value => {
               setCensus({ value: value, error: "" });
             }}
             error={!!census.error}

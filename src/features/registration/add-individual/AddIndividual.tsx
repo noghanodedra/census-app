@@ -1,4 +1,9 @@
-import React, { useState, forwardRef, useImperativeHandle } from "react";
+import React, {
+  useState,
+  forwardRef,
+  useEffect,
+  useImperativeHandle
+} from "react";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import {
@@ -6,7 +11,7 @@ import {
   ViewWithTitle,
   TextInput,
   NumberInput,
-  Dropdown,
+  Dropdown
 } from "components";
 
 import styles from "./styles";
@@ -28,58 +33,58 @@ const AddIndividual = (
 
   const [name, setName] = useState({
     value: "hekk",
-    error: "",
+    error: ""
   });
   const [age, setAge] = useState({
     value: 5,
-    error: "",
+    error: ""
   });
   const [educationYears, setEducationYears] = useState({
     value: 5,
-    error: "",
+    error: ""
   });
   const [hoursPerWeek, setHoursPerWeek] = useState({
     value: 5,
-    error: "",
+    error: ""
   });
   const [education, setEducation] = useState({
     value: 0,
-    error: "",
+    error: ""
   });
 
   const [workClass, setWorkClass] = useState({
     value: 0,
-    error: "",
+    error: ""
   });
 
   const [occupation, setOccupation] = useState({
     value: 0,
-    error: "",
+    error: ""
   });
 
   const [relationship, setRelationship] = useState({
     value: 0,
-    error: "",
+    error: ""
   });
 
   const [caste, setCaste] = useState({
     value: 0,
-    error: "",
+    error: ""
   });
 
   const [gender, setGender] = useState({
     value: 0,
-    error: "",
+    error: ""
   });
 
   const [incomeClass, setIncomeClass] = useState({
     value: 0,
-    error: "",
+    error: ""
   });
 
   const [maritalStatus, setMaritalStatus] = useState({
     value: 0,
-    error: "",
+    error: ""
   });
 
   const _validateFields = () => {
@@ -96,7 +101,7 @@ const AddIndividual = (
     if (!hoursPerWeek.value) {
       setHoursPerWeek({
         ...hoursPerWeek,
-        error: "Please enter the hours per week.",
+        error: "Please enter the hours per week."
       });
       return false;
     }
@@ -104,7 +109,7 @@ const AddIndividual = (
     if (!educationYears.value) {
       setEducationYears({
         ...educationYears,
-        error: "Please enter the education years.",
+        error: "Please enter the education years."
       });
       return false;
     }
@@ -127,7 +132,7 @@ const AddIndividual = (
     if (relationship.value === 0) {
       setRelationship({
         ...relationship,
-        error: "Please select relationship.",
+        error: "Please select relationship."
       });
       return false;
     }
@@ -135,7 +140,7 @@ const AddIndividual = (
     if (caste.value === 0) {
       setCaste({
         ...caste,
-        error: "Please select caste.",
+        error: "Please select caste."
       });
       return false;
     }
@@ -143,7 +148,7 @@ const AddIndividual = (
     if (gender.value === 0) {
       setGender({
         ...gender,
-        error: "Please select gender.",
+        error: "Please select gender."
       });
       return false;
     }
@@ -151,14 +156,14 @@ const AddIndividual = (
     if (incomeClass.value === 0) {
       setIncomeClass({
         ...incomeClass,
-        error: "Please select income class.",
+        error: "Please select income class."
       });
       return false;
     }
     if (maritalStatus.value === 0) {
       setMaritalStatus({
         ...maritalStatus,
-        error: "Please select marital status.",
+        error: "Please select marital status."
       });
       return false;
     }
@@ -180,15 +185,20 @@ const AddIndividual = (
       genderId: gender.value,
       familyId: Number.parseInt(family.id, 10),
       incomeClassId: incomeClass.value,
-      maritalStatusId: maritalStatus.value,
+      maritalStatusId: maritalStatus.value
     };
     return createIndividual({ variables: { individual } });
   };
 
   useImperativeHandle(ref, () => ({
     _onAddIndividual,
-    _validateFields,
+    _validateFields
   }));
+
+  useEffect(() => {
+    console.log("effect");
+    scrollViewRef.current.scrollTo({ x: 0, y: 0, animated: true });
+  }, []);
 
   return (
     <View ref={ref} style={styles.container}>
@@ -198,7 +208,7 @@ const AddIndividual = (
             label="Name"
             returnKeyType="next"
             value={name.value}
-            onChangeText={(text) => setName({ value: text, error: "" })}
+            onChangeText={text => setName({ value: text, error: "" })}
             error={!!name.error}
             errorText={name.error}
             autoCapitalize="none"
@@ -212,10 +222,10 @@ const AddIndividual = (
             valueType="real"
             minValue={0}
             maxValue={110}
-            onChange={(text) =>
+            onChange={text =>
               setAge({
                 value: Number.parseInt(text, 10),
-                error: "",
+                error: ""
               })
             }
             error={!!age.error}
@@ -230,7 +240,7 @@ const AddIndividual = (
             minValue={0}
             maxValue={100}
             value={hoursPerWeek.value}
-            onChange={(text) =>
+            onChange={text =>
               setHoursPerWeek({ value: Number.parseInt(text, 10), error: "" })
             }
             error={!!hoursPerWeek.error}
@@ -245,7 +255,7 @@ const AddIndividual = (
             minValue={0}
             maxValue={30}
             value={educationYears.value}
-            onChange={(text) =>
+            onChange={text =>
               setEducationYears({ value: Number.parseInt(text, 10), error: "" })
             }
             error={!!educationYears.error}
@@ -257,7 +267,7 @@ const AddIndividual = (
             label="Select education"
             data={dropDownData.educationList}
             dropdownPosition={2}
-            onChangeText={(value) => {
+            onChangeText={value => {
               setEducation({ value: Number.parseInt(value.id, 10), error: "" });
             }}
             error={!!education.error}
@@ -269,7 +279,7 @@ const AddIndividual = (
             label="Select work-class"
             data={dropDownData.workClassList}
             dropdownPosition={2}
-            onChangeText={(value) => {
+            onChangeText={value => {
               setWorkClass({ value: Number.parseInt(value.id, 10), error: "" });
             }}
             error={!!workClass.error}
@@ -281,10 +291,10 @@ const AddIndividual = (
             label="Select occupation"
             data={dropDownData.occupationList}
             dropdownPosition={2}
-            onChangeText={(value) => {
+            onChangeText={value => {
               setOccupation({
                 value: Number.parseInt(value.id, 10),
-                error: "",
+                error: ""
               });
             }}
             error={!!occupation.error}
@@ -296,10 +306,10 @@ const AddIndividual = (
             label="Select relationship"
             data={dropDownData.relationshipList}
             dropdownPosition={2}
-            onChangeText={(value) => {
+            onChangeText={value => {
               setRelationship({
                 value: Number.parseInt(value.id, 10),
-                error: "",
+                error: ""
               });
             }}
             error={!!relationship.error}
@@ -311,7 +321,7 @@ const AddIndividual = (
             label="Select caste"
             data={dropDownData.casteList}
             dropdownPosition={2}
-            onChangeText={(value) => {
+            onChangeText={value => {
               setCaste({ value: Number.parseInt(value.id, 10), error: "" });
             }}
             error={!!caste.error}
@@ -323,7 +333,7 @@ const AddIndividual = (
             label="Select gender"
             data={dropDownData.genderList}
             dropdownPosition={2}
-            onChangeText={(value) => {
+            onChangeText={value => {
               setGender({ value: Number.parseInt(value.id, 10), error: "" });
             }}
             error={!!gender.error}
@@ -335,10 +345,10 @@ const AddIndividual = (
             label="Select income-class"
             data={dropDownData.incomeClassList}
             dropdownPosition={2}
-            onChangeText={(value) => {
+            onChangeText={value => {
               setIncomeClass({
                 value: Number.parseInt(value.id, 10),
-                error: "",
+                error: ""
               });
             }}
             error={!!incomeClass.error}
@@ -350,10 +360,10 @@ const AddIndividual = (
             label="Select marital-status"
             data={dropDownData.maritalStatusList}
             dropdownPosition={2}
-            onChangeText={(value) => {
+            onChangeText={value => {
               setMaritalStatus({
                 value: Number.parseInt(value.id, 10),
-                error: "",
+                error: ""
               });
             }}
             error={!!maritalStatus.error}

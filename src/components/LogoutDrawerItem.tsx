@@ -3,6 +3,7 @@ import { DrawerItem } from "@react-navigation/drawer";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import ScreenNames from "constants/screen-names";
+import { removeUser } from "helpers/utils";
 
 const LOGOUT_USER = gql`
   mutation logout($accessToken: String!) {
@@ -15,6 +16,7 @@ const LogoutDrawerItem = ({ ...props }) => {
   const handleLogout = () => {
     logout({ variables: { accessToken: "test" } })
       .then(({ data }) => {
+        removeUser();
         props.navigation.navigate(ScreenNames.HOME);
       })
       .catch(e => {
