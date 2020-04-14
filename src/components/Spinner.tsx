@@ -6,7 +6,6 @@ import { LoadingContext } from "contexts";
 
 const Spinner = ({ ...props }) => {
   const { loadingCount } = useContext(LoadingContext);
-  console.log("loadingCount", loadingCount);
   return (
     <>
       {loadingCount > 0 && (

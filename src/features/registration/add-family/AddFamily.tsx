@@ -77,7 +77,6 @@ const AddFamily = ({ navigation, dropDownData, scrollViewRef }, ref) => {
   }));
 
   useEffect(() => {
-    console.log("effect");
     scrollViewRef.current.scrollTo({ x: 0, y: 0, animated: true });
   }, []);
 

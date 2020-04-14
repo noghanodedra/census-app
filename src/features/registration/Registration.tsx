@@ -32,7 +32,7 @@ const Registration = ({ ...props }) => {
     const addFamilyPromise = new Promise<boolean>((resolve, reject) => {
       if (!addFamilyCompRef.current._validateFields()) {
         showErrorToast("Some of the field(s) are invalid.");
-        setState({ errors: true, isValid: true });
+        setState({ errors: true, isValid: false });
         reject(false);
         return false;
       }
@@ -44,11 +44,12 @@ const Registration = ({ ...props }) => {
           hideLoading();
           resolve(true);
           showSuccesToast("Family added.");
+          setState({ errors: false, isValid: true });
         })
         .catch(e => {
           console.log(e);
           hideLoading();
-          setState({ errors: true, isValid: true });
+          setState({ errors: true, isValid: false });
           reject(false);
         });
     });
@@ -59,7 +60,7 @@ const Registration = ({ ...props }) => {
     const addIndividualPromise = new Promise<boolean>((resolve, reject) => {
       if (!addIndividualCompRef.current._validateFields()) {
         showErrorToast("Some of the field(s) are invalid.");
-        setState({ errors: true, isValid: true });
+        setState({ errors: true, isValid: false });
         reject(false);
         return false;
       }
@@ -70,11 +71,12 @@ const Registration = ({ ...props }) => {
           hideLoading();
           showSuccesToast("Individual added.");
           resolve(true);
+          setState({ errors: false, isValid: true });
         })
         .catch(e => {
           console.log(e);
           hideLoading();
-          setState({ errors: true, isValid: true });
+          setState({ errors: true, isValid: false });
           reject(false);
         });
     });

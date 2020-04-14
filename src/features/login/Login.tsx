@@ -62,7 +62,6 @@ const Login = ({ navigation }) => {
       return;
     }
     showLoading();
-    console.log(new Date());
     login({
       variables: {
         email: email.value,
@@ -71,7 +70,6 @@ const Login = ({ navigation }) => {
       fetchPolicy: "no-cache"
     })
       .then(({ data }) => {
-        console.log(new Date());
         //console.log(data);
         hideLoading();
         setUser(data.login.profile);

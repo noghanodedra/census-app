@@ -3,7 +3,6 @@ import { LoadingContext } from "contexts";
 
 const LoadingProvider = ({ children }) => {
   const showLoading = () => {
-    console.log("show", loading.loadingCount);
     toggleLoading((prevState) => {
       return {
         ...prevState,
@@ -13,8 +12,6 @@ const LoadingProvider = ({ children }) => {
   };
 
   const hideLoading = () => {
-    console.log("hide", loading.loadingCount);
-
     toggleLoading((prevState) => {
       return {
         ...prevState,

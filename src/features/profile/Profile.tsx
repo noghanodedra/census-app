@@ -42,7 +42,6 @@ const Profile = ({ ...props }) => {
   const fetchUser = async () => {
     const user = await getUser();
     setUser(user);
-    console.log(user);
   };
 
   const _onChangePressed = () => {
@@ -63,7 +62,6 @@ const Profile = ({ ...props }) => {
       },
     })
       .then(({ data }) => {
-        console.log(data);
         hideLoading();
         if (data.changePassword) {
           showSuccesToast("Password changed.");

@@ -94,7 +94,6 @@ export const scrollToComponentInScrollView = (scrollViewRef, componentRef) => {
     componentRef.current.measureLayout(
       findNodeHandle(scrollViewRef.current),
       (x, y) => {
-        console.log("x", x, "y", y);
         scrollViewRef.current.scrollTo({ x: 0, y: y, animated: true });
       }
     );
