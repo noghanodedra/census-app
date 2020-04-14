@@ -2,8 +2,8 @@ import React, { memo } from "react";
 import { StyleSheet } from "react-native";
 import Modal from "react-native-modal";
 import { Text, View } from "react-native";
-import { Button } from "components";
 
+import { Button } from "components";
 import { theme } from "helpers";
 
 const AuthErrorModal = ({ ...props }) => (

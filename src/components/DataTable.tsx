@@ -1,6 +1,7 @@
 import React, { memo, useState } from "react";
 import { View, ScrollView, StyleSheet, Text } from "react-native";
 import { DataTable as PaperDataTable } from "react-native-paper";
+
 import { theme } from "helpers";
 
 const DataTable = ({ columns, fields, data, onRowSelected }) => {

@@ -6,6 +6,8 @@ import React, {
 } from "react";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
+import { View } from "react-native";
+
 import {
   Background,
   ViewWithTitle,
@@ -13,9 +15,7 @@ import {
   NumberInput,
   Dropdown
 } from "components";
-
 import styles from "./styles";
-import { View } from "react-native";
 
 const ADD_INDIVIDUAL = gql`
   mutation createIndividual($individual: CreateIndividualInput!) {

@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import { View } from "react-native";
-import FamilyContainer from "./components/FamilyContainer";
 
+import FamilyContainer from "./components/FamilyContainer";
 import styles from "./styles";
 
 const Summary = ({ family }) => {

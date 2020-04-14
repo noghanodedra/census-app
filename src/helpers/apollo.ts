@@ -1,8 +1,8 @@
 import ApolloClient, { InMemoryCache } from "apollo-boost";
-//ts-ignore
 import { GRAPHQL_ENDPOINT } from "react-native-dotenv";
-import { showErrorToast } from "components/UIUtilities";
 import { EventRegister } from "react-native-event-listeners";
+
+import { showErrorToast } from "components/UIUtilities";
 import EventNames from "constants/event-names";
 
 const makeApolloClient = () => {

@@ -11,7 +11,6 @@ import {
   passwordValidator,
 } from "helpers/utils";
 import { LoadingContext } from "contexts";
-
 import styles from "./styles";
 
 const CHANGE_PASSWORD = gql`

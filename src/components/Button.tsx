@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 import { StyleSheet } from "react-native";
 import { Button as PaperButton } from "react-native-paper";
+
 import { theme } from "helpers";
 
 const Button = ({ mode, style, children, ...props }) => (

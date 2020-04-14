@@ -2,6 +2,7 @@ import React, { memo, useContext } from "react";
 import { StyleSheet } from "react-native";
 import { Appbar } from "react-native-paper";
 import { DrawerActions } from "react-navigation-drawer";
+
 import { theme } from "helpers";
 import { HeaderTitleContext } from "contexts";
 

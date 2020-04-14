@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 import { StyleSheet } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+
 import { theme } from "helpers";
 
 const Logo = () => (

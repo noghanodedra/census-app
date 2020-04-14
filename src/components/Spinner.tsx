@@ -1,6 +1,7 @@
 import React, { memo, useContext } from "react";
 import { StyleSheet, View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
+
 import { theme } from "helpers";
 import { LoadingContext } from "contexts";
 

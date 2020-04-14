@@ -1,5 +1,6 @@
 import React, { memo } from "react";
 import { StyleSheet, KeyboardAvoidingView, View } from "react-native";
+
 import { theme } from "helpers";
 
 const Background = ({ children, ...props }) => (

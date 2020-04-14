@@ -1,5 +1,6 @@
 import React, { memo, useState } from "react";
 import { Text, TouchableOpacity } from "react-native";
+
 import { emailValidator } from "helpers/utils";
 import {
   Button,
@@ -10,7 +11,6 @@ import {
   TextInput,
 } from "components";
 import ScreenNames from "constants/screen-names";
-
 import styles from "./styles";
 
 const ForgotPassword = ({ navigation }) => {
