@@ -1,5 +1,4 @@
 import ApolloClient, { InMemoryCache } from "apollo-boost";
-
 //ts-ignore
 import { GRAPHQL_ENDPOINT } from "react-native-dotenv";
 import { showErrorToast } from "components/UIUtilities";
@@ -53,6 +52,10 @@ const makeApolloClient = () => {
               // in the chain. This effectively intercepts the old
               // failed request, and retries it with a new token
               // return forward(operation);
+              break;
+
+            case "INTERNAL_SERVER_ERROR":
+              showErrorToast("Server error.");
               break;
           }
         }
