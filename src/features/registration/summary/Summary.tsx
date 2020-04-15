@@ -7,7 +7,7 @@ import styles from "./styles";
 const Summary = ({ family }) => {
   return (
     <View style={styles.container}>
-      <FamilyContainer family={family}></FamilyContainer>
+      <FamilyContainer family={family} />
     </View>
   );
 };

@@ -10,6 +10,6 @@ const ScreenNames = {
   REGISTRATION: "Registration",
   PROFILE: "Profile",
   APP: "App",
-  AUTH: "Auth",
+  AUTH: "Auth"
 };
 export default ScreenNames;
