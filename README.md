@@ -1,8 +1,10 @@
 # Census App (Population registration app)
 
-This is a basic app built while learning react-native. This app does not cover all the use cases related to population registration but tried to add basic features like login, security(JWT, secure cookie), validations, navigation, theming etc.
+This is a basic client mobile app built while learning react-native. This app does not cover all the use cases related to population registration but the intention is to cover react-native fundamentals add basic features like login, security(JWT, secure cookie, authorization using tokens), validations, navigation, theming etc.
 
 ### Demo(GIF)
+
+![](census-demo.gif)
 
 ### Prerequisites
 
@@ -65,10 +67,6 @@ dev@dev.com/dev
 ```
 test@test.com/test
 ```
-
-## Running the tests
-
-Explain how to run the automated tests for this system
 
 ## Built With
 
