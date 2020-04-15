@@ -15,27 +15,56 @@ You will need to have Xcode and iOS simulator set up for IOS and for Android wil
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
+First install expo-cli
 
 ```
-example
+npm install -g expo-cli
+```
+
+Clone the repository by below command.
+
+```
+git clone https://github.com/noghanodedra/census-app.git
+```
+
+Then CD to cloned repo folder by
+
+```
+cd census-app
+npm install
+```
+
+### Locally running the app
+
+Use below commands to start the app locally from the project root folder for respective platforms.
+
+```
+expo start --android
+```
+
+```
+expo start --ios
+```
+
+```
+expo start --web
 ```
 
 ### Test users
 
 Following test users are readily availabe to test the look and feel of the app.
 
-test@test.com/test
-dev@dev.com/dev
+```
 admin@admin.com/admin
-
-```
-example
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+```
+dev@dev.com/dev
+```
+
+```
+test@test.com/test
+```
 
 ## Running the tests
 
