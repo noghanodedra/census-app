@@ -43,6 +43,7 @@ const ForgotPassword = ({ navigation }) => {
         autoCompleteType="email"
         textContentType="emailAddress"
         keyboardType="email-address"
+        maxLength={45}
       />
 
       <Button mode="contained" onPress={_onSendPressed} style={styles.button}>

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Provider } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
 import { ApolloProvider } from "react-apollo";
@@ -8,7 +8,6 @@ import App from "./src";
 import { theme } from "helpers/theme";
 import makeApolloClient from "helpers/apollo";
 import { Spinner, LoadingProvider } from "components";
-import { getToken } from "helpers/utils";
 import { HeaderTitleContext } from "contexts";
 import { useHeaderTitle } from "hooks";
 console.disableYellowBox = true;
@@ -18,21 +17,7 @@ console.ignoredYellowBox = ["Require cycle"];
 
 const Main = () => {
   const headerTitle = useHeaderTitle();
-  const [client, setClient] = React.useState(null);
-  const fetchSession = async () => {
-    // fetch session
-    const session = await getToken();
-    const sessionObj = JSON.parse(session) || {};
-    const { token, id } = sessionObj;
-
-    const client = makeApolloClient();
-
-    setClient(client);
-  };
-  React.useEffect(() => {
-    fetchSession();
-  }, []);
-
+  const client = makeApolloClient();
   if (!client) {
     return null;
   }

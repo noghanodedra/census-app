@@ -32,19 +32,19 @@ const AddIndividual = (
   const [createIndividual] = useMutation(ADD_INDIVIDUAL);
 
   const [name, setName] = useState({
-    value: "hekk",
+    value: "",
     error: ""
   });
   const [age, setAge] = useState({
-    value: 5,
+    value: 0,
     error: ""
   });
   const [educationYears, setEducationYears] = useState({
-    value: 5,
+    value: 0,
     error: ""
   });
   const [hoursPerWeek, setHoursPerWeek] = useState({
-    value: 5,
+    value: 0,
     error: ""
   });
   const [education, setEducation] = useState({
@@ -214,6 +214,7 @@ const AddIndividual = (
             autoCapitalize="none"
             scrollViewRef={scrollViewRef}
             ref={React.createRef()}
+            maxLength={45}
           />
           <NumberInput
             label="Age"

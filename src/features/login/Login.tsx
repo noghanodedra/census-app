@@ -9,7 +9,7 @@ import {
   Background,
   Header,
   Logo,
-  TextInput
+  TextInput,
 } from "components";
 import { LoadingContext } from "contexts";
 import { emailValidator, passwordValidator, setUser } from "helpers/utils";
@@ -32,20 +32,18 @@ const LOGIN_USER = gql`
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState({
     value: "test@test.com",
-    error: ""
+    error: "",
   });
   const [password, setPassword] = useState({
     value: "test",
-    error: ""
+    error: "",
   });
   const { showLoading, hideLoading } = useContext(LoadingContext);
 
   const [
     login,
-    { loading: mutationLoading, error: mutationError }
+    { loading: mutationLoading, error: mutationError },
   ] = useMutation(LOGIN_USER);
-
-
 
   const _onLoginPressed = () => {
     const emailError = emailValidator(email.value);
@@ -54,11 +52,11 @@ const Login = ({ navigation }) => {
     if (emailError || passwordError) {
       setEmail({
         ...email,
-        error: emailError
+        error: emailError,
       });
       setPassword({
         ...password,
-        error: passwordError
+        error: passwordError,
       });
       return;
     }
@@ -66,9 +64,9 @@ const Login = ({ navigation }) => {
     login({
       variables: {
         email: email.value,
-        password: password.value
+        password: password.value,
       },
-      fetchPolicy: "no-cache"
+      fetchPolicy: "no-cache",
     })
       .then(({ data }) => {
         //console.log(data);
@@ -76,7 +74,7 @@ const Login = ({ navigation }) => {
         setUser(data.login.profile);
         navigation.navigate(ScreenNames.APP);
       })
-      .catch(e => {
+      .catch((e) => {
         console.log(e);
         hideLoading();
       });
@@ -94,27 +92,29 @@ const Login = ({ navigation }) => {
         label="Email"
         returnKeyType="next"
         value={email.value}
-        onChangeText={text => setEmail({ value: text, error: "" })}
+        onChangeText={(text) => setEmail({ value: text, error: "" })}
         error={!!email.error}
         errorText={email.error}
         autoCapitalize="none"
         textContentType="emailAddress"
         keyboardType="email-address"
+        maxLength={45}
       />
 
       <TextInput
         label="Password"
         returnKeyType="done"
         value={password.value}
-        onChangeText={text =>
+        onChangeText={(text) =>
           setPassword({
             value: text,
-            error: ""
+            error: "",
           })
         }
         error={!!password.error}
         errorText={password.error}
         secureTextEntry
+        maxLength={45}
       />
 
       <View style={styles.forgotPassword}>

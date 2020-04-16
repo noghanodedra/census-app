@@ -6,13 +6,13 @@ import { View } from "react-native";
 
 const Address = ({ ...props }, ref) => {
   const [districts, setDistricts] = useState([]);
-  const [line1, setLine1] = useState({ value: "erer", error: "" });
-  const [line2, setLine2] = useState({ value: "re", error: "" });
-  const [line3, setLine3] = useState({ value: "er", error: "" });
+  const [line1, setLine1] = useState({ value: "", error: "" });
+  const [line2, setLine2] = useState({ value: "", error: "" });
+  const [line3, setLine3] = useState({ value: "", error: "" });
   const [state, setState] = useState({ value: { name: "" }, error: "" });
   const [district, setDistrict] = useState({ value: { name: "" }, error: "" });
-  const [townCity, setTownCity] = useState({ value: "trttrtr", error: "" });
-  const [postcode, setPostcode] = useState({ value: "454545", error: "" });
+  const [townCity, setTownCity] = useState({ value: "", error: "" });
+  const [postcode, setPostcode] = useState({ value: "", error: "" });
 
   const { addressData, scrollViewRef } = props;
 
@@ -64,6 +64,7 @@ const Address = ({ ...props }, ref) => {
         autoCapitalize="none"
         scrollViewRef={scrollViewRef}
         ref={React.createRef()}
+        maxLength={50}
       />
       <TextInput
         label="Line 2 (Optional)"
@@ -75,6 +76,7 @@ const Address = ({ ...props }, ref) => {
         autoCapitalize="none"
         scrollViewRef={scrollViewRef}
         ref={React.createRef()}
+        maxLength={45}
       />
       <TextInput
         label="Line 3 (Optional)"
@@ -86,6 +88,7 @@ const Address = ({ ...props }, ref) => {
         autoCapitalize="none"
         scrollViewRef={scrollViewRef}
         ref={React.createRef()}
+        maxLength={45}
       />
       <TextInput
         label="Town/Village/City"
@@ -97,6 +100,7 @@ const Address = ({ ...props }, ref) => {
         autoCapitalize="none"
         scrollViewRef={scrollViewRef}
         ref={React.createRef()}
+        maxLength={45}
       />
       <Dropdown
         label="Select state"
@@ -130,8 +134,10 @@ const Address = ({ ...props }, ref) => {
         error={!!postcode.error}
         errorText={postcode.error}
         autoCapitalize="none"
+        keyboardType="numeric"
         scrollViewRef={scrollViewRef}
         ref={React.createRef()}
+        maxLength={8}
       />
     </View>
   );

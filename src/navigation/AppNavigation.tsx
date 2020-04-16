@@ -31,7 +31,6 @@ const AppNavigation = createStackNavigator({
   DrawerNavigator: {
     screen: DrawerNavigator,
     navigationOptions: ({ navigation }) => {
-
       return {
         header: (props) => (
           <CustomAppbar previous={null} navigation={navigation}></CustomAppbar>
