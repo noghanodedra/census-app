@@ -9,13 +9,15 @@ const makeApolloClient = () => {
   console.log(GRAPHQL_ENDPOINT);
   const client = new ApolloClient({
     uri: GRAPHQL_ENDPOINT,
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+      addTypename: false,
+    }),
     credentials: "include",
-    request: async operation => {
+    request: async (operation) => {
       operation.setContext({
         fetchOptions: {
-          credentials: "include"
-        }
+          credentials: "include",
+        },
       });
     },
     onError: ({ graphQLErrors, networkError, operation, forward }) => {
@@ -60,7 +62,7 @@ const makeApolloClient = () => {
           }
         }
       }
-    }
+    },
   });
   return client;
 };

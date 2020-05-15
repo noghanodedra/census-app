@@ -20,3 +20,5 @@ export default class App extends React.Component {
     return <AppContainer />;
   }
 }
+// localization
+//https://lokalise.com/blog/react-native-localization/

@@ -138,6 +138,7 @@ const LandingPage = ({ ...props }) => {
               <List.Accordion
                 style={styles.accordion}
                 titleStyle={styles.accordionTitle}
+                key={index}
                 title={item.name}
                 left={props => (
                   <List.Icon
@@ -152,6 +153,7 @@ const LandingPage = ({ ...props }) => {
                     <List.Item
                       titleStyle={styles.titleStyle}
                       title={subItem.name}
+                      key={index}
                     />
                   );
                 })}
