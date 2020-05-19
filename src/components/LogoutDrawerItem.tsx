@@ -8,8 +8,8 @@ import ScreenNames from "constants/screen-names";
 import { removeUser } from "helpers/utils";
 
 const LOGOUT_USER = gql`
-  mutation logout($accessToken: String!) {
-    logout(accessToken: $accessToken)
+  mutation logout {
+    logout
   }
 `;
 const LogoutDrawerItem = ({ ...props }) => {
@@ -18,7 +18,7 @@ const LogoutDrawerItem = ({ ...props }) => {
 
   const handleLogout = () => {
     showLoading();
-    logout({ variables: { accessToken: "test" } })
+    logout()
       .then(({ data }) => {
         removeUser();
         hideLoading();
